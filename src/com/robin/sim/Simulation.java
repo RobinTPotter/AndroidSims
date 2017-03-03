@@ -55,7 +55,9 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         simView.message("touch");
-        return simView.getGestureDetector().onTouchEvent(event) || simView.getScaleGestureDetector().onTouchEvent(event)  ;
+        boolean ret=simView.getGestureDetector().onTouchEvent(event);
+        ret= simView.getScaleGestureDetector().onTouchEvent(event) || ret ;
+        return  ret ;
     }
 
     @Override
