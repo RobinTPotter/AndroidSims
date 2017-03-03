@@ -3,6 +3,7 @@ package com.robin.sim;
 import android.content.Context;
 import android.graphics.*;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ public class SimView extends SurfaceView {
     private SurfaceHolder surfaceHolder;
     private SimThread myThread;
     private Bitmap buffer;
+    private Simulation simulation;
 
     public SimView(Context context) {
         super(context);
@@ -31,6 +33,8 @@ public class SimView extends SurfaceView {
         init();
     }
 
+    public Bitmap getBuffer() { return buffer;}
+
     private void init() {
 
         message("init");
@@ -38,6 +42,10 @@ public class SimView extends SurfaceView {
         myThread = new SimThread(this);
 
         surfaceHolder = getHolder();
+
+        simulation=new Simulation(this);
+
+        setOnTouchListener(simulation);
 
         /*
 
@@ -49,11 +57,12 @@ public class SimView extends SurfaceView {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 myThread.setRunning(true);
-                 try{   myThread.start();}
-                 catch  (Exception ex) {
+                try {
+                    myThread.start();
+                } catch (Exception ex) {
 
-                     message(ex.getMessage());
-                 }
+                    message(ex.getMessage());
+                }
             }
 
             @Override
@@ -82,39 +91,12 @@ public class SimView extends SurfaceView {
 
     protected void drawSomething(Canvas surfaceCanvas) {
 
-        updateProperties();
+        simulation.updateProperties(getWidth(), getHeight());
 
         if (buffer != null) {
-            drawMethod(new Canvas(buffer));
+            simulation.drawMethod( getWidth(), getHeight());
             surfaceCanvas.drawBitmap(buffer, 0, 0, null);
         }
-
-    }
-
-    private void updateProperties() {
-    }
-
-    private void drawMethod(Canvas canvas) {
-
-        Paint p = new Paint();
-        int rr = 0, gg = 0, bb = 0;
-        float ll = 0;
-
-        while (ll < 0.3) {
-
-            rr = (int) (Math.random() * 255);
-            gg = (int) (Math.random() * 255);
-            bb = (int) (Math.random() * 255);
-
-            ll = (0.2126f * rr + 0.7152f * gg + 0.0722f * bb);
-        }
-
-        p.setARGB(255, rr, gg, bb);
-
-        canvas.drawRect(new Rect(
-                        (int) (Math.random() * getWidth()), (int) (Math.random() * getHeight()),
-                        (int) (Math.random() * getWidth()), (int) (Math.random() * getHeight())),
-                p);
 
     }
 
