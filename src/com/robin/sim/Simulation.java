@@ -1,8 +1,6 @@
 package com.robin.sim;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
+import android.graphics.*;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -23,7 +21,12 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     }
 
     protected void drawMethod(int width, int height) {
-        defaultDrawMethod(width, height);
+
+
+        //defaultDrawMethod(width, height);
+
+
+
     }
 
     protected void defaultDrawMethod(int width, int height) {
@@ -54,7 +57,14 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        simView.message("touch");
+
+        Canvas c= new Canvas(simView.getBuffer());
+        Paint p=new Paint();
+        p.setColor(Color.RED);
+        c.drawOval(new RectF(event.getX()-10,event.getY()-10,event.getX()+10,event.getY()+10),p);
+
+
+        //simView.message("touch");
         boolean ret=simView.getGestureDetector().onTouchEvent(event);
         ret= simView.getScaleGestureDetector().onTouchEvent(event) || ret ;
         return  ret ;
@@ -62,52 +72,59 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     @Override
     public boolean onDown(MotionEvent e) {
-        simView.message("down");
+        //simView.message("down");
         return false;
     }
 
     @Override
     public void onShowPress(MotionEvent e) {
-        simView.message("show press");
+       // simView.message("show press");
     }
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        simView.message("single tap up");
+       // simView.message("single tap up");
         return false;
     }
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        simView.message("scroll");
+        //simView.message("scroll");
         return false;
     }
 
     @Override
     public void onLongPress(MotionEvent e) {
-        simView.message("long press");
+        //simView.message("long press");
     }
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        simView.message("fling");
+       // simView.message("fling");
         return false;
     }
 
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
-        simView.message("scale");
+        //simView.message("scale");
         return false;
     }
 
     @Override
     public boolean onScaleBegin(ScaleGestureDetector detector) {
-        simView.message("scale begin");
+        //simView.message("scale begin");
+
+        Canvas c= new Canvas(simView.getBuffer());
+        Paint p=new Paint();
+        p.setColor(Color.RED);
+        c.drawRect(new RectF(detector.getFocusX(),detector.getFocusY(),detector.getFocusX()+detector.getCurrentSpanX(),detector.getFocusY()+detector.getCurrentSpanY()    ),p);
+
         return false;
     }
 
     @Override
     public void onScaleEnd(ScaleGestureDetector detector) {
-        simView.message("scale end");
+        //simView.message("scale end");
+
     }
 }
