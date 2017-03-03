@@ -22,10 +22,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     protected void drawMethod(int width, int height) {
 
-
         //defaultDrawMethod(width, height);
-
-
 
     }
 
@@ -58,16 +55,15 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
-        Canvas c= new Canvas(simView.getBuffer());
-        Paint p=new Paint();
+        Canvas c = new Canvas(simView.getBuffer());
+        Paint p = new Paint();
         p.setColor(Color.RED);
-        c.drawOval(new RectF(event.getX()-10,event.getY()-10,event.getX()+10,event.getY()+10),p);
-
+        c.drawOval(new RectF(event.getX() - 10, event.getY() - 10, event.getX() + 10, event.getY() + 10), p);
 
         //simView.message("touch");
-        boolean ret=simView.getGestureDetector().onTouchEvent(event);
-        ret= simView.getScaleGestureDetector().onTouchEvent(event) || ret ;
-        return  ret ;
+        boolean ret = simView.getGestureDetector().onTouchEvent(event);
+        ret = simView.getScaleGestureDetector().onTouchEvent(event) || ret;
+        return ret;
     }
 
     @Override
@@ -78,12 +74,12 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     @Override
     public void onShowPress(MotionEvent e) {
-       // simView.message("show press");
+        // simView.message("show press");
     }
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-       // simView.message("single tap up");
+        // simView.message("single tap up");
         return false;
     }
 
@@ -100,7 +96,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-       // simView.message("fling");
+        // simView.message("fling");
         return false;
     }
 
@@ -114,11 +110,23 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     public boolean onScaleBegin(ScaleGestureDetector detector) {
         //simView.message("scale begin");
 
-        Canvas c= new Canvas(simView.getBuffer());
-        Paint p=new Paint();
-        p.setColor(Color.RED);
-        c.drawRect(new RectF(detector.getFocusX(),detector.getFocusY(),detector.getFocusX()+detector.getCurrentSpanX(),detector.getFocusY()+detector.getCurrentSpanY()    ),p);
-
+        Canvas c = new Canvas(simView.getBuffer());
+        Paint p = new Paint();
+        p.setColor(Color.GREEN);
+        c.drawRect(new RectF(
+                detector.getFocusX() - detector.getCurrentSpanX() / 2,
+                detector.getFocusY() - detector.getCurrentSpanY() / 2,
+                detector.getFocusX() + detector.getCurrentSpanX() / 2,
+                detector.getFocusY() + detector.getCurrentSpanY() / 2
+        ), p);
+        p.setColor(Color.YELLOW);
+        p.setStyle(Paint.Style.STROKE);
+        c.drawRect(new RectF(
+                detector.getFocusX() - detector.getCurrentSpanX() / 2,
+                detector.getFocusY() - detector.getCurrentSpanY() / 2,
+                detector.getFocusX() + detector.getCurrentSpanX() / 2,
+                detector.getFocusY() + detector.getCurrentSpanY() / 2
+        ), p);
         return false;
     }
 
