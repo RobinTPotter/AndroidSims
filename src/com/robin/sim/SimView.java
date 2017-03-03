@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.*;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
+import android.view.ScaleGestureDetector;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.Toast;
@@ -18,6 +19,7 @@ public class SimView extends SurfaceView {
     private Bitmap buffer;
     private Simulation simulation;
     GestureDetector gestureDetector;
+    ScaleGestureDetector scaleGestureDetector;
 
     public SimView(Context context) {
         super(context);
@@ -37,6 +39,7 @@ public class SimView extends SurfaceView {
     public Bitmap getBuffer() { return buffer;}
 
     public GestureDetector getGestureDetector() { return gestureDetector; }
+    public ScaleGestureDetector getScaleGestureDetector() { return scaleGestureDetector; }
 
     private void init() {
 
@@ -51,6 +54,7 @@ public class SimView extends SurfaceView {
         setOnTouchListener(simulation);
 
         gestureDetector = new GestureDetector(getContext(), simulation);
+        scaleGestureDetector = new ScaleGestureDetector(getContext(), simulation);
 
         /*
 

@@ -5,15 +5,16 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 
 /**
  * Created by potterr on 03/03/2017.
  */
-public class Simulation implements View.OnTouchListener, GestureDetector.OnGestureListener {
+public class Simulation implements View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener {
 
     SimView simView;
-    
+
     public Simulation(SimView simView) {
         this.simView = simView;
     }
@@ -91,4 +92,20 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         return false;
     }
 
+    @Override
+    public boolean onScale(ScaleGestureDetector detector) {
+        simView.message("scale");
+        return false;
+    }
+
+    @Override
+    public boolean onScaleBegin(ScaleGestureDetector detector) {
+        simView.message("scale begin");
+        return false;
+    }
+
+    @Override
+    public void onScaleEnd(ScaleGestureDetector detector) {
+        simView.message("scale end");
+    }
 }
