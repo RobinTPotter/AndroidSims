@@ -13,12 +13,9 @@ import android.view.View;
 public class Simulation implements View.OnTouchListener, GestureDetector.OnGestureListener {
 
     SimView simView;
-    GestureDetector gestureDetector;
-
+    
     public Simulation(SimView simView) {
         this.simView = simView;
-        gestureDetector = new GestureDetector(simView.getContext(), this);
-
     }
 
     protected void updateProperties(int width, int height) {
@@ -56,40 +53,40 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-
-        simView.message("onTouch");
-        return gestureDetector.onTouchEvent(event);
+        simView.message("touch");
+        return simView.getGestureDetector().onTouchEvent(event);
     }
 
     @Override
     public boolean onDown(MotionEvent e) {
+        simView.message("down");
         return false;
     }
 
     @Override
     public void onShowPress(MotionEvent e) {
-
+        simView.message("show press");
     }
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
+        simView.message("single tap up");
         return false;
     }
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+        simView.message("scroll");
         return false;
     }
 
     @Override
     public void onLongPress(MotionEvent e) {
-
+        simView.message("long press");
     }
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-
-
         simView.message("fling");
         return false;
     }

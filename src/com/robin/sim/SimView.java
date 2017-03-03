@@ -17,6 +17,7 @@ public class SimView extends SurfaceView {
     private SimThread myThread;
     private Bitmap buffer;
     private Simulation simulation;
+    GestureDetector gestureDetector;
 
     public SimView(Context context) {
         super(context);
@@ -35,6 +36,8 @@ public class SimView extends SurfaceView {
 
     public Bitmap getBuffer() { return buffer;}
 
+    public GestureDetector getGestureDetector() { return gestureDetector; }
+
     private void init() {
 
         message("init");
@@ -46,6 +49,8 @@ public class SimView extends SurfaceView {
         simulation=new Simulation(this);
 
         setOnTouchListener(simulation);
+
+        gestureDetector = new GestureDetector(getContext(), simulation);
 
         /*
 
