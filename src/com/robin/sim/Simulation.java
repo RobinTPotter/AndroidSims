@@ -33,6 +33,21 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         public Worm(Simulation ww) {
             this.wormWrangler = ww;
+
+            int rr = 0, gg = 0, bb = 0;
+            float ll = 0;
+
+            while (ll < 0.5) {
+
+                rr = (int) (Math.random() * 255);
+                gg = (int) (Math.random() * 255);
+                bb = (int) (Math.random() * 255);
+
+                ll = (0.2126f * rr + 0.7152f * gg + 0.0722f * bb);
+            }
+
+            p.setARGB(255, rr, gg, bb);
+
         }
 
         public void update() {
@@ -94,7 +109,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         for (Worm w : worms) {
             w.update();
         }
-        
+
     }
 
     protected void drawMethod(int width, int height) {
