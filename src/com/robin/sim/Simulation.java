@@ -92,11 +92,20 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public void onLongPress(MotionEvent e) {
         //simView.message("long press");
+        Canvas c = new Canvas(simView.getBuffer());
+        Paint p = new Paint();
+        p.setColor(Color.CYAN);
+        p.setStyle(Paint.Style.STROKE);
+        c.drawOval(new RectF(e.getX()-20,e.getY()-20,e.getX()+20,e.getY()+20), p);
     }
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         // simView.message("fling");
+        Canvas c = new Canvas(simView.getBuffer());
+        Paint p = new Paint();
+        p.setColor(Color.CYAN);
+        c.drawLine(e1.getX(),e1.getY(),e2.getX(),e2.getY(), p);
         return false;
     }
 
@@ -133,6 +142,14 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public void onScaleEnd(ScaleGestureDetector detector) {
         //simView.message("scale end");
-
+        Canvas c = new Canvas(simView.getBuffer());
+        Paint p = new Paint();
+        p.setColor(Color.BLUE);
+        c.drawRect(new RectF(
+                detector.getFocusX() - detector.getCurrentSpanX() / 2,
+                detector.getFocusY() - detector.getCurrentSpanY() / 2,
+                detector.getFocusX() + detector.getCurrentSpanX() / 2,
+                detector.getFocusY() + detector.getCurrentSpanY() / 2
+        ), p);
     }
 }
