@@ -112,7 +112,19 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
         //simView.message("scale");
-        return false;
+        //
+
+        Canvas c = new Canvas(simView.getBuffer());
+        Paint p = new Paint();
+        p.setColor(Color.YELLOW);
+        p.setStyle(Paint.Style.STROKE);
+        c.drawRect(new RectF(
+                detector.getFocusX() - detector.getCurrentSpanX() / 2,
+                detector.getFocusY() - detector.getCurrentSpanY() / 2,
+                detector.getFocusX() + detector.getCurrentSpanX() / 2,
+                detector.getFocusY() + detector.getCurrentSpanY() / 2
+        ), p);
+        return true;
     }
 
     @Override
@@ -128,15 +140,8 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
                 detector.getFocusX() + detector.getCurrentSpanX() / 2,
                 detector.getFocusY() + detector.getCurrentSpanY() / 2
         ), p);
-        p.setColor(Color.YELLOW);
-        p.setStyle(Paint.Style.STROKE);
-        c.drawRect(new RectF(
-                detector.getFocusX() - detector.getCurrentSpanX() / 2,
-                detector.getFocusY() - detector.getCurrentSpanY() / 2,
-                detector.getFocusX() + detector.getCurrentSpanX() / 2,
-                detector.getFocusY() + detector.getCurrentSpanY() / 2
-        ), p);
-        return false;
+
+        return true;
     }
 
     @Override
