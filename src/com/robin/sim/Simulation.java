@@ -1,6 +1,7 @@
 package com.robin.sim;
 
 import android.graphics.*;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -10,10 +11,6 @@ import android.view.View;
  * Created by potterr on 03/03/2017.
  */
 public class Simulation implements View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener {
-
-    private interface WormWrangler {
-        public void setNewTarget(Worm w);
-    }
 
     private class Worm {
         double x, y, size;
@@ -32,6 +29,8 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         Simulation wormWrangler;
 
         public Worm(Simulation ww) {
+
+            Log.d("Worm", "Create worm");
             this.wormWrangler = ww;
 
             int rr = 0, gg = 0, bb = 0;
@@ -47,16 +46,24 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
             }
 
             p.setARGB(255, rr, gg, bb);
-
+            update();
         }
 
         public void update() {
+            Log.d("Worm", "update worm");
 
             dirx = targetx - x;
             diry = targety - y;
             mag = Math.sqrt(dirx * dirx + diry * diry);
 
-            if (mag < 10) wormWrangler.setNewTarget(this);
+            if (mag < 10){
+                wormWrangler.setNewTarget(this);
+
+                dirx = targetx - x;
+                diry = targety - y;
+                mag = Math.sqrt(dirx * dirx + diry * diry);
+
+            }
 
             dirx *= size / mag;
             diry *= size / mag;
@@ -64,10 +71,13 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
             x += dirx * speed;
             y += diry * speed;
 
+            Log.d("Worm",this+" "+x+" "+y);
+
         }
 
         public void draw(Canvas c) {
 
+            Log.d("Worm", "draw worm");
             c.drawLine((float) (x + 0 * dirx), (float) (y + 0 * diry), (float) (x + 1 * dirx), (float) (y + 1 * diry), p);
 
         }
@@ -76,48 +86,69 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     SimView simView;
     Worm[] worms;
     int width, height;
+    int numWorms=10;
 
     public Simulation(SimView simView) {
         this.simView = simView;
+        this.worms = new Worm[numWorms];
+
+        Log.d("Simulation", "Create Simulation");
+
+       for (int ww= 0;ww < numWorms; ww++){
+            this.worms[ww] = new Worm(this);
+           this.worms[ww].size = (int) (10 * Math.random()) + 5;
+           this.worms[ww].x = 20;
+           this.worms[ww].y = 20;
+           this.worms[ww].targetx = 20;
+           this.worms[ww].targety = 20;
+           this.worms[ww].state = Math.random();
+            Log.d("Simulation", "worm is " + this.worms[ww]);
+        }
+
     }
 
     public void setNewTarget(Worm w) {
 
+        Log.d("Simulation", "set target for " + w);
         w.targetx = Math.random() * width;
         w.targety = Math.random() * height;
 
     }
 
     protected void updateProperties(int width, int height) {
+
+        Log.d("Simulation", "update props");
+
         this.width = width;
         this.height = height;
-        if (worms == null) {
 
-            worms = new Worm[10];
-            for (Worm w : worms) {
-                w = new Worm(this);
-                w.size = (int) (10 * Math.random()) + 5;
-                w.x = (Math.random() * width);
-                w.y = (Math.random() * height);
-                w.targetx = (Math.random() * width);
-                w.targety = (Math.random() * height);
-                w.state = Math.random();
+        if (this.worms != null) {
+            for (Worm w : this.worms) {
+                if (w != null) {
+                    w.update();
+                } else {
+                    Log.d("Simulation", "worm is null " + w);
+                }
             }
+        } else {
 
-        }
-
-        for (Worm w : worms) {
-            w.update();
+            Log.d("Simulation", "worms null");
         }
 
     }
 
     protected void drawMethod(int width, int height) {
 
-        //defaultDrawMethod(width, height);
+        Canvas c=new Canvas(simView.getBuffer());
+        Paint p=new Paint();
+        c.drawRect(0,0,width, height,p);
 
-        for (Worm w : worms) {
-            w.draw(new Canvas(simView.getBuffer()));
+        Log.d("Simulation", "draw");
+        if (worms != null) {
+            for (Worm w : worms) {
+                if (w != null)
+                    w.draw(new Canvas(simView.getBuffer()));
+            }
         }
     }
 
