@@ -20,6 +20,8 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         double diry;
         double mag;
 
+        
+
         double MAX_ANGLE = (60.0 * 2 * Math.PI / 360);
         double state = 0;
 
@@ -65,8 +67,8 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
             }
 
-            dirx *= 1 / mag;
-            diry *= 1 / mag;
+            dirx *= size / mag;
+            diry *= size/ mag;
 
             x += dirx * speed;
             y += diry * speed;
@@ -79,7 +81,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         public void draw(Canvas c) {
 
             Log.d("Worm", "draw worm");
-            c.drawLine((float) (x + 0 * size* dirx), (float) (y + 0 *size* diry), (float) (x - 1 *size* dirx), (float) (y - 1 * size*diry), p);
+            c.drawLine((float) (x + 0 *  dirx), (float) (y + 0 * diry), (float) (x - 1 * dirx), (float) (y - 1 * diry), p);
 
         }
     }
@@ -114,7 +116,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         Log.d("Simulation", "set target for " + w);
         w.targetx = Math.random() * width;
         w.targety = Math.random() * height;
-        w.p.setStrokeWidth(Math.max((float)w.size/8,1));
+        w.p.setStrokeWidth(Math.max((float)w.size/5,1));
 
     }
 
