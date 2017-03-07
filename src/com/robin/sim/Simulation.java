@@ -56,7 +56,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
             diry = targety - y;
             mag = Math.sqrt(dirx * dirx + diry * diry);
 
-            if (mag < 10){
+            if (mag < 10) {
                 wormWrangler.setNewTarget(this);
 
                 dirx = targetx - x;
@@ -65,20 +65,21 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
             }
 
-            dirx *= size / mag;
-            diry *= size / mag;
+            dirx *= 1 / mag;
+            diry *= 1 / mag;
 
             x += dirx * speed;
             y += diry * speed;
 
-            Log.d("Worm",this+" "+x+" "+y);
+            Log.d("Worm", this + " " + x + " " + y);
+
 
         }
 
         public void draw(Canvas c) {
 
             Log.d("Worm", "draw worm");
-            c.drawLine((float) (x + 0 * dirx), (float) (y + 0 * diry), (float) (x + 1 * dirx), (float) (y + 1 * diry), p);
+            c.drawLine((float) (x + 0 * size* dirx), (float) (y + 0 *size* diry), (float) (x - 1 *size* dirx), (float) (y - 1 * size*diry), p);
 
         }
     }
@@ -86,7 +87,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     SimView simView;
     Worm[] worms;
     int width, height;
-    int numWorms=10;
+    int numWorms = 10;
 
     public Simulation(SimView simView) {
         this.simView = simView;
@@ -94,14 +95,15 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         Log.d("Simulation", "Create Simulation");
 
-       for (int ww= 0;ww < numWorms; ww++){
-            this.worms[ww] = new Worm(this);
-           this.worms[ww].size = (int) (10 * Math.random()) + 5;
-           this.worms[ww].x = 20;
-           this.worms[ww].y = 20;
-           this.worms[ww].targetx = 20;
-           this.worms[ww].targety = 20;
-           this.worms[ww].state = Math.random();
+        for (int ww = 0; ww < numWorms; ww++) {
+            Worm w = new Worm(this);
+            w.size = (int) (15 * Math.random()) + 10;
+            w.x = 20;
+            w.y = 20;
+            w.targetx = 20;
+            w.targety = 20;
+            w.state = Math.random();
+            this.worms[ww] = w;
             Log.d("Simulation", "worm is " + this.worms[ww]);
         }
 
@@ -112,6 +114,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         Log.d("Simulation", "set target for " + w);
         w.targetx = Math.random() * width;
         w.targety = Math.random() * height;
+        w.p.setStrokeWidth(Math.max((float)w.size/8,1));
 
     }
 
@@ -139,9 +142,9 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     protected void drawMethod(int width, int height) {
 
-        Canvas c=new Canvas(simView.getBuffer());
-        Paint p=new Paint();
-        c.drawRect(0,0,width, height,p);
+        Canvas c = new Canvas(simView.getBuffer());
+        Paint p = new Paint();
+        c.drawRect(0, 0, width, height, p);
 
         Log.d("Simulation", "draw");
         if (worms != null) {
