@@ -11,6 +11,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1dc6a925-0bc1-41f5-b5d9-4bbd01759b26" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/robin/sim/Worm.java" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Simulation$WormWrangler.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/com/robin/sim/BuildConfig.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/com/robin/sim/R$attr.class" afterPath="" />
@@ -25,10 +26,6 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/com/robin/sim/SimView.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/sim.apk" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/sim.unaligned.apk" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.apk" afterPath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.unaligned.apk" afterPath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Simulation$Worm.class" afterPath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Simulation$Worm.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Simulation.class" afterPath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Simulation.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" afterPath="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" />
     </list>
@@ -94,17 +91,36 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Simulation.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Simulation.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Simulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3770795">
-              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Worm.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Worm.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.66061455">
+              <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -123,6 +139,7 @@
         <option value="$PROJECT_DIR$/src/com/robin/sim/SimView.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" />
+        <option value="$PROJECT_DIR$/src/com/robin/sim/Worm.java" />
       </list>
     </option>
   </component>
@@ -553,7 +570,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23521505" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23521505" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -710,9 +727,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Simulation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3770795">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Worm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66061455">
+          <caret line="91" column="9" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

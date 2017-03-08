@@ -7,116 +7,50 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
+import java.util.ArrayList;
+
 /**
  * Created by potterr on 03/03/2017.
  */
-public class Simulation implements View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener {
-
-    private class Worm {
-        double x, y, size;
-        double targetx;
-        double targety;
-        double dirx;
-        double diry;
-        double mag;
-
-        
-
-        double MAX_ANGLE = (60.0 * 2 * Math.PI / 360);
-        double state = 0;
-
-        double speed = 0.5;
-
-        Paint p = new Paint();
-        Simulation wormWrangler;
-
-        public Worm(Simulation ww) {
-
-            Log.d("Worm", "Create worm");
-            this.wormWrangler = ww;
-
-            int rr = 0, gg = 0, bb = 0;
-            float ll = 0;
-
-            while (ll < 0.5) {
-
-                rr = (int) (Math.random() * 255);
-                gg = (int) (Math.random() * 255);
-                bb = (int) (Math.random() * 255);
-
-                ll = (0.2126f * rr + 0.7152f * gg + 0.0722f * bb);
-            }
-
-            p.setARGB(255, rr, gg, bb);
-            update();
-        }
-
-        public void update() {
-            Log.d("Worm", "update worm");
-
-            dirx = targetx - x;
-            diry = targety - y;
-            mag = Math.sqrt(dirx * dirx + diry * diry);
-
-            if (mag < 10) {
-                wormWrangler.setNewTarget(this);
-
-                dirx = targetx - x;
-                diry = targety - y;
-                mag = Math.sqrt(dirx * dirx + diry * diry);
-
-            }
-
-            dirx *= size / mag;
-            diry *= size/ mag;
-
-            x += dirx * speed;
-            y += diry * speed;
-
-            Log.d("Worm", this + " " + x + " " + y);
-
-
-        }
-
-        public void draw(Canvas c) {
-
-            Log.d("Worm", "draw worm");
-            c.drawLine((float) (x + 0 *  dirx), (float) (y + 0 * diry), (float) (x - 1 * dirx), (float) (y - 1 * diry), p);
-
-        }
-    }
+public class Simulation implements View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener, Worm.WormWrangler {
 
     SimView simView;
-    Worm[] worms;
+    ArrayList<Worm> worms;
     int width, height;
-    int numWorms = 10;
+    int initialWorms=10;
 
     public Simulation(SimView simView) {
         this.simView = simView;
-        this.worms = new Worm[numWorms];
+
 
         Log.d("Simulation", "Create Simulation");
 
-        for (int ww = 0; ww < numWorms; ww++) {
-            Worm w = new Worm(this);
-            w.size = (int) (15 * Math.random()) + 10;
-            w.x = 20;
-            w.y = 20;
-            w.targetx = 20;
-            w.targety = 20;
-            w.state = Math.random();
-            this.worms[ww] = w;
-            Log.d("Simulation", "worm is " + this.worms[ww]);
-        }
+        addWorm(initialWorms    );
 
     }
+public void addWorm(int numWorms) {
 
+
+    for (int ww = 0; ww < numWorms; ww++) {
+        Worm w = new Worm(this);
+        w.size = (int) (5 * Math.random()) + 5;
+        w.x = 20;
+        w.y = 20;
+        w.targetx = 20;
+        w.targety = 20;
+        w.state = Math.random();
+       worms.add( w);
+        Log.d("Simulation", "worm is " + w);
+    }
+
+
+}
     public void setNewTarget(Worm w) {
 
         Log.d("Simulation", "set target for " + w);
         w.targetx = Math.random() * width;
         w.targety = Math.random() * height;
-        w.p.setStrokeWidth(Math.max((float)w.size/5,1));
+
 
     }
 
