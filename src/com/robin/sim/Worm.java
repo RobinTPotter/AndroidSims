@@ -106,8 +106,8 @@ public class Worm {
             mag = (float) (Math.sqrt(dirx2 * dirx2 + diry2 * diry2));
             dirx2 *= 1 / mag;
             diry2 *= 1 / mag;
-            newsegments[ss] = lastx + dirx2 * segsize * (1 - speed);
-            newsegments[ss + 1] = lasty + diry2 * segsize * (1 - speed);
+            newsegments[ss] = lastx + dirx2 * (segsize);// + speed);
+            newsegments[ss + 1] = lasty + diry2 * (segsize);// + speed);
             if (ss + 2 <= segments.length - 1) {
                 newsegments[ss + 2]=newsegments[ss];
                 newsegments[ss + 3] = newsegments[ss + 1];
