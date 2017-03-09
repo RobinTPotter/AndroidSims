@@ -18,6 +18,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     ArrayList<Worm> worms = new ArrayList<Worm>();
     int width, height;
     int initialWorms = 20;
+    Worm selectedWorm;
 
     public Simulation(SimView simView) {
         this.simView = simView;
@@ -28,29 +29,8 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     }
 
-    public void addWorm(int numWorms) {
-
-        for (int ww = 0; ww < numWorms; ww++) {
-            Worm w = new Worm(this);
-            w.size = (int) (30 * Math.random()) + 15;
-            w.x = 100;
-            w.y = 100;
-            w.targetx = 100;
-            w.targety = 100;
-            w.state = Math.random();
-            w.speed = (float) (Math.random() * 1.5 + 0.5);
-            w.initSegments();
-            worms.add(w);
-            Log.d("Simulation", "worm is " + w);
-        }
-
-    }
-
-    public void setNewTarget(Worm w) {
-
-        Log.d("Simulation", "set target for " + w);
-        w.targetx = (float) (Math.random() * width);
-        w.targety = (float) (Math.random() * height);
+    private float distSquared(float x1, float y1, float x2, float y2) {
+        return (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1);
 
     }
 
@@ -62,11 +42,13 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         this.height = height;
 
         if (this.worms != null) {
-            for (Worm w : this.worms) {
-                if (w != null) {
-                    w.update();
-                } else {
-                    Log.d("Simulation", "worm is null " + w);
+            synchronized (worms) {
+                for (Worm w : this.worms) {
+                    if (w != null) {
+                        w.update();
+                    } else {
+                        Log.d("Simulation", "worm is null " + w);
+                    }
                 }
             }
         } else {
@@ -84,12 +66,19 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         Log.d("Simulation", "draw");
         if (worms != null) {
-            for (Worm w : worms) {
-                if (w != null)
-                    w.draw(new Canvas(simView.getBuffer()));
+            synchronized (worms) {
+                for (Worm w : worms) {
+                    if (w != null)
+                        w.draw(new Canvas(simView.getBuffer()));
+                }
             }
         }
+
     }
+
+    /*
+    gesture methods
+     */
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -114,6 +103,12 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         // simView.message("single tap up");
+        Worm w = findWorm(e.getX(), e.getY(), 16);
+        selectedWorm = w;
+        Log.i("Worm", "got worm" + w);
+        if (w == null) {
+            selectedWorm = addWorm(e.getX(), e.getY());
+        }
         return false;
     }
 
@@ -155,4 +150,66 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         //simView.message("scale end");
 
     }
+
+
+/*
+interface methods WormWrangler
+ */
+
+    public void addWorm(int numWorms) {
+
+        for (int ww = 0; ww < numWorms; ww++) {
+            Worm w = new Worm(this);
+            w.size = (int) (30 * Math.random()) + 15;
+            w.x = 100;
+            w.y = 100;
+            w.targetx = 100;
+            w.targety = 100;
+            w.state = Math.random();
+            w.speed = (float) (Math.random() * 1.5 + 0.5);
+            w.initSegments();
+            worms.add(w);
+            Log.d("Simulation", "worm is " + w);
+        }
+
+    }
+
+    public Worm addWorm(float x, float y) {
+
+        Worm w = new Worm(this);
+        w.size = (int) (30 * Math.random()) + 15;
+        w.x = x;
+        w.y = y;
+        w.targetx = x;
+        w.targety = y;
+        w.state = Math.random();
+        w.speed = (float) (Math.random() * 1.5 + 0.5);
+        w.initSegments();
+
+        synchronized (worms) {
+            worms.add(w);
+        }
+        Log.d("Simulation", "worm is " + w);
+        return w;
+
+    }
+
+    public void setNewTarget(Worm w) {
+
+        Log.d("Simulation", "set target for " + w);
+        w.targetx = (float) (Math.random() * width);
+        w.targety = (float) (Math.random() * height);
+
+    }
+
+    public Worm findWorm(float x, float y, float dist2) {
+
+        for (Worm w : worms) {
+            if (distSquared(x, y, w.x, w.y) < dist2) { //ie 4 px away
+                return w;
+            }
+        }
+        return null;
+    }
+
 }

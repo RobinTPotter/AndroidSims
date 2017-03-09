@@ -143,7 +143,7 @@ public class Worm {
 
     public interface WormWrangler {
         void setNewTarget(Worm w);
-
         void addWorm(int numToAdd);
+        Worm findWorm(float x, float y,float dist2);
     }
 }
