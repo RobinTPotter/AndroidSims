@@ -6,20 +6,16 @@ import android.util.Log;
 
 public class Worm {
 
-
-    double x, y;
+    float x, y;
     int size;
-    float segsize=10.0f;
-    double targetx;
-    double targety;
-    double dirx;
-    double diry;
-    double mag;
-    float[] body=null;
-
-
-    double MAX_ANGLE = (60.0 * 2 * Math.PI / 360);
-
+    float segsize = 8.0f;
+    float targetx;
+    float targety;
+    float dirx;
+    float diry;
+    float mag;
+    float segments[];
+    float step = 1f;
 
     double state = 0;
 
@@ -46,7 +42,20 @@ public class Worm {
         }
 
         p.setARGB(255, rr, gg, bb);
+
+        segments = new float[size * 2];
+
         update();
+    }
+
+    public void initSegments() {
+
+        segments = new float[size * 2];
+        int sss=0;
+        for (int ss =  segments.length-1;ss>1; ss -= 2) {
+            segments[ss] = y -(sss++)*segsize;
+            segments[ss-1] = x;
+        }
     }
 
     public void update() {
@@ -55,40 +64,48 @@ public class Worm {
 
         dirx = targetx - x;
         diry = targety - y;
-        mag = Math.sqrt(dirx * dirx + diry * diry);
+        mag = (float) (Math.sqrt(dirx * dirx + diry * diry));
 
         if (mag < 10) {
             wormWrangler.setNewTarget(this);
-
             dirx = targetx - x;
             diry = targety - y;
-            mag = Math.sqrt(dirx * dirx + diry * diry);
-
+            mag = (float) (Math.sqrt(dirx * dirx + diry * diry));
         }
 
-        dirx *= size / mag;
-        diry *= size/ mag;
+        dirx *= 1 / mag;
+        diry *= 1 / mag;
 
-        x += dirx * speed;
-        y += diry * speed;
+        x += dirx * (speed + Math.random() * 0.1);
+        y += diry * (speed + Math.random() * 0.1);
 
         Log.d("Worm", this + " " + x + " " + y);
 
-        if (body==null )body=new float[size*4];
-        int bb=0;
+        if (segments.length == 0) return;
 
-        body[bb++]=(float)x;
-        body[bb++]=(float)y;
-        body[bb++]=(float)(x-segsize*dirx);
-        body[bb++]=(float)(y-segsize*diry);
+        /*
 
-        for (int ss=1;ss<size; ss++) {
-            body[bb++]=(float)(x-segsize*(ss)*dirx);
-            body[bb++]=(float)(y-segsize*(ss)*diry);
-            body[bb]+=(float)(x-segsize*(ss+1)*dirx);
-            body[bb++]/=2;
-            body[bb]+=(float)(y-segsize*(ss+1)*diry);
-            body[bb++]/=2;
+        last to first
+        distance * step of last to next
+         */
+
+        segments[0] = x;
+        segments[1] = y;
+
+        for (int ss = segments.length - 1; ss > 2; ss -= 2) {
+
+            float lasty = segments[ss];
+            float lastx = segments[ss - 1];
+            float nexty = segments[ss - 2];
+            float nextx = segments[ss - 3];
+            dirx = nextx - lastx;
+            diry = nexty - lasty;
+            mag = (float) (Math.sqrt(dirx * dirx + diry * diry));
+            dirx *= step*segsize  / mag;
+            diry *= step*segsize  / mag;
+            segments[ss] += diry;
+            segments[ss - 1] += dirx;
+           // Log.i("worm", " " + segments[ss - 1] + " " + segments[ss]);
         }
 
     }
@@ -96,12 +113,13 @@ public class Worm {
     public void draw(Canvas c) {
 
         Log.d("Worm", "draw worm");
-        c.drawLines(body, p);
-
+        c.drawCircle(x, y, 5, p);
+        c.drawLines(segments, p);
     }
 
     public interface WormWrangler {
         void setNewTarget(Worm w);
+
         void addWorm(int numToAdd);
     }
 }

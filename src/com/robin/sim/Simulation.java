@@ -15,9 +15,9 @@ import java.util.ArrayList;
 public class Simulation implements View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener, Worm.WormWrangler {
 
     SimView simView;
-    ArrayList<Worm> worms;
+    ArrayList<Worm> worms=new ArrayList<Worm>();
     int width, height;
-    int initialWorms=10;
+    int initialWorms=5;
 
     public Simulation(SimView simView) {
         this.simView = simView;
@@ -33,12 +33,14 @@ public void addWorm(int numWorms) {
 
     for (int ww = 0; ww < numWorms; ww++) {
         Worm w = new Worm(this);
-        w.size = (int) (5 * Math.random()) + 5;
+        w.size = (int) (5 * Math.random()) + 15;
         w.x = 20;
         w.y = 20;
         w.targetx = 20;
         w.targety = 20;
         w.state = Math.random();
+        w.speed = (float)(Math.random()*0.5+0.5);
+        w.initSegments();
        worms.add( w);
         Log.d("Simulation", "worm is " + w);
     }
@@ -48,8 +50,8 @@ public void addWorm(int numWorms) {
     public void setNewTarget(Worm w) {
 
         Log.d("Simulation", "set target for " + w);
-        w.targetx = Math.random() * width;
-        w.targety = Math.random() * height;
+        w.targetx = (float)(Math.random() * width);
+        w.targety = (float)(Math.random() * height);
 
 
     }
