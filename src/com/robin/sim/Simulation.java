@@ -15,44 +15,42 @@ import java.util.ArrayList;
 public class Simulation implements View.OnTouchListener, GestureDetector.OnGestureListener, ScaleGestureDetector.OnScaleGestureListener, Worm.WormWrangler {
 
     SimView simView;
-    ArrayList<Worm> worms=new ArrayList<Worm>();
+    ArrayList<Worm> worms = new ArrayList<Worm>();
     int width, height;
-    int initialWorms=20;
+    int initialWorms = 20;
 
     public Simulation(SimView simView) {
         this.simView = simView;
 
-
         Log.d("Simulation", "Create Simulation");
 
-        addWorm(initialWorms    );
+        addWorm(initialWorms);
 
     }
-public void addWorm(int numWorms) {
 
+    public void addWorm(int numWorms) {
 
-    for (int ww = 0; ww < numWorms; ww++) {
-        Worm w = new Worm(this);
-        w.size = (int) (30 * Math.random()) + 15;
-        w.x = 100;
-        w.y = 100;
-        w.targetx = 100;
-        w.targety = 100;
-        w.state = Math.random();
-        w.speed = (float)(Math.random()*1.5+0.5);
-        w.initSegments();
-       worms.add( w);
-        Log.d("Simulation", "worm is " + w);
+        for (int ww = 0; ww < numWorms; ww++) {
+            Worm w = new Worm(this);
+            w.size = (int) (30 * Math.random()) + 15;
+            w.x = 100;
+            w.y = 100;
+            w.targetx = 100;
+            w.targety = 100;
+            w.state = Math.random();
+            w.speed = (float) (Math.random() * 1.5 + 0.5);
+            w.initSegments();
+            worms.add(w);
+            Log.d("Simulation", "worm is " + w);
+        }
+
     }
 
-
-}
     public void setNewTarget(Worm w) {
 
         Log.d("Simulation", "set target for " + w);
-        w.targetx = (float)(Math.random() * width);
-        w.targety = (float)(Math.random() * height);
-
+        w.targetx = (float) (Math.random() * width);
+        w.targety = (float) (Math.random() * height);
 
     }
 

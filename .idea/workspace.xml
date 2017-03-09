@@ -26,6 +26,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/com/robin/sim/SimView.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/sim.apk" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/sim.unaligned.apk" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" afterPath="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" />
     </list>
     <ignored path="Sim.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -59,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SimView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SimView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.71004564">
+              <caret line="93" column="54" selection-start-line="93" selection-start-column="54" selection-end-line="93" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -93,19 +94,19 @@
         <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Simulation.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding>
-                <element signature="e#507#513#0" expanded="true" />
+                <element signature="e#509#515#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Worm.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Worm.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Worm.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5045662">
-              <caret line="139" column="33" selection-start-line="139" selection-start-column="33" selection-end-line="139" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -138,8 +139,8 @@
         <option value="$PROJECT_DIR$/src/com/robin/sim/Sim.java" />
         <option value="$PROJECT_DIR$/src/com/robin/sim/SimView.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" />
         <option value="$PROJECT_DIR$/src/com/robin/sim/Worm.java" />
+        <option value="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" />
       </list>
     </option>
   </component>
@@ -665,7 +666,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#507#513#0" expanded="true" />
+            <element signature="e#509#515#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -718,14 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Sim.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -736,31 +729,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimView.java">
+    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Worm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
+          <caret line="142" column="0" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Simulation.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
-            <element signature="e#507#513#0" expanded="true" />
+            <element signature="e#509#515#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Worm.java">
+    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimThread.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5045662">
-          <caret line="139" column="33" selection-start-line="139" selection-start-column="33" selection-end-line="139" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.71004564">
+          <caret line="93" column="54" selection-start-line="93" selection-start-column="54" selection-end-line="93" selection-end-column="54" />
+          <folding />
         </state>
       </provider>
     </entry>
