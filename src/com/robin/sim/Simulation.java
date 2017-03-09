@@ -17,7 +17,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     SimView simView;
     ArrayList<Worm> worms=new ArrayList<Worm>();
     int width, height;
-    int initialWorms=5;
+    int initialWorms=15;
 
     public Simulation(SimView simView) {
         this.simView = simView;
@@ -39,7 +39,7 @@ public void addWorm(int numWorms) {
         w.targetx = 100;
         w.targety = 100;
         w.state = Math.random();
-        w.speed = (float)(Math.random()*0.5+0.5);
+        w.speed = (float)(Math.random()*1.5+1.5);
         w.initSegments();
        worms.add( w);
         Log.d("Simulation", "worm is " + w);
