@@ -8,7 +8,7 @@ public class Worm {
 
     float x, y;
     int size;
-    float segsize = 12.0f;
+    float segsize = 8.0f;
     float targetx;
     float targety;
     float dirx;
@@ -137,7 +137,7 @@ public class Worm {
     public void draw(Canvas c) {
 
         Log.d("Worm", "draw worm");
-        c.drawCircle(x, y, 5, p);
+        c.drawCircle(x, y, 2, p);
         c.drawLines(segments, p);
     }
 
