@@ -8,7 +8,7 @@ public class Worm {
 
     float x, y;
     int size;
-    float segsize = 8.0f;
+    float segsize = 12.0f;
     float targetx;
     float targety;
     float dirx;
@@ -19,7 +19,7 @@ public class Worm {
 
     double state = 0;
 
-    double speed = 0.5;
+    float speed = 0.5f;
 
     Paint p = new Paint();
     Simulation wormWrangler;
@@ -51,10 +51,10 @@ public class Worm {
     public void initSegments() {
 
         segments = new float[size * 2];
-        int sss=0;
-        for (int ss =  segments.length-1;ss>1; ss -= 2) {
-            segments[ss] = y -(sss++)*segsize;
-            segments[ss-1] = x;
+        int sss = 0;
+        for (int ss = segments.length - 1; ss > 1; ss -= 2) {
+            segments[ss] = y - (sss++) * segsize;
+            segments[ss - 1] = x;
         }
     }
 
@@ -92,7 +92,30 @@ public class Worm {
         segments[0] = x;
         segments[1] = y;
 
-        for (int ss = segments.length - 1; ss > 2; ss -= 2) {
+        float[] newsegments = new float[segments.length];
+        newsegments[0] = x;
+        newsegments[1] = y;
+
+        for (int ss = 2; ss < segments.length ; ss += 4) {
+            float lastx = segments[ss - 2];
+            float lasty = segments[ss - 1];
+            float thisx = segments[ss];
+            float thisy = segments[ss + 1];
+            float dirx2 = thisx - lastx;
+            float diry2 = thisy - lasty;
+            mag = (float) (Math.sqrt(dirx2 * dirx2 + diry2 * diry2));
+            dirx2 *= 1 / mag;
+            diry2 *= 1 / mag;
+            newsegments[ss] = lastx + dirx2 * segsize * (1 - speed);
+            newsegments[ss + 1] = lasty + diry2 * segsize * (1 - speed);
+            if (ss + 2 <= segments.length - 1) {
+                newsegments[ss + 2]=newsegments[ss];
+                newsegments[ss + 3] = newsegments[ss + 1];
+            }
+
+        }
+/*
+        for (int ss = segments.length - 1; ss > 1; ss -= 2) {
 
             float lasty = segments[ss];
             float lastx = segments[ss - 1];
@@ -101,13 +124,14 @@ public class Worm {
             dirx = nextx - lastx;
             diry = nexty - lasty;
             mag = (float) (Math.sqrt(dirx * dirx + diry * diry));
-            dirx *= step*segsize  / mag;
-            diry *= step*segsize  / mag;
-            segments[ss] += diry;
-            segments[ss - 1] += dirx;
-           // Log.i("worm", " " + segments[ss - 1] + " " + segments[ss]);
+            dirx *= 1 / mag;
+            diry *= 1 / mag;
+            segments[ss] += diry * segsize * speed;
+            segments[ss - 1] += dirx * segsize * speed;
+            // Log.i("worm", " " + segments[ss - 1] + " " + segments[ss]);
         }
-
+*/
+        segments = newsegments;
     }
 
     public void draw(Canvas c) {

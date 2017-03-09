@@ -33,11 +33,11 @@ public void addWorm(int numWorms) {
 
     for (int ww = 0; ww < numWorms; ww++) {
         Worm w = new Worm(this);
-        w.size = (int) (5 * Math.random()) + 15;
-        w.x = 20;
-        w.y = 20;
-        w.targetx = 20;
-        w.targety = 20;
+        w.size = (int) (10 * Math.random()) + 25;
+        w.x = 100;
+        w.y = 100;
+        w.targetx = 100;
+        w.targety = 100;
         w.state = Math.random();
         w.speed = (float)(Math.random()*0.5+0.5);
         w.initSegments();
