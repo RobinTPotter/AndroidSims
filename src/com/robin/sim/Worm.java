@@ -45,7 +45,6 @@ public class Worm {
 
         segments = new float[size * 2];
 
-        update();
     }
 
     public void initSegments() {
@@ -56,6 +55,7 @@ public class Worm {
             segments[ss] = y - 0.5f +  (float)(Math.random());
             segments[ss - 1] = x - 0.5f + (float)(Math.random());
         }
+        update();
     }
 
     public void update() {
