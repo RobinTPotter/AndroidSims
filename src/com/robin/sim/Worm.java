@@ -108,7 +108,7 @@ public class Worm {
             diry2 *= 1 / mag;
             newsegments[ss] = lastx + dirx2 * (segsize);// + speed);
             newsegments[ss + 1] = lasty + diry2 * (segsize);// + speed);
-            if (ss + 2 <= segments.length - 1) {
+            if (ss + 3 < segments.length) {
                 newsegments[ss + 2]=newsegments[ss];
                 newsegments[ss + 3] = newsegments[ss + 1];
             }
