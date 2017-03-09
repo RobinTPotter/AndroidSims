@@ -53,8 +53,8 @@ public class Worm {
         segments = new float[size * 2];
         int sss = 0;
         for (int ss = segments.length - 1; ss > 1; ss -= 2) {
-            segments[ss] = y - (sss++) * segsize;
-            segments[ss - 1] = x;
+            segments[ss] = y - 0.5f +  (float)(Math.random());
+            segments[ss - 1] = x - 0.5f + (float)(Math.random());
         }
     }
 
