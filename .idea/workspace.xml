@@ -26,13 +26,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/com/robin/sim/SimView.class" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/sim.apk" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/sim/sim.unaligned.apk" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.apk" afterPath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.unaligned.apk" afterPath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Simulation.class" afterPath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Simulation.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Worm.class" afterPath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Worm.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" afterPath="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/robin/sim/Worm.java" afterPath="$PROJECT_DIR$/src/com/robin/sim/Worm.java" />
     </list>
     <ignored path="Sim.iws" />
     <ignored path=".idea/workspace.xml" />
