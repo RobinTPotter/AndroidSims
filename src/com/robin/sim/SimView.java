@@ -36,10 +36,21 @@ public class SimView extends SurfaceView {
         init();
     }
 
-    public Bitmap getBuffer() { return buffer;}
+    public Bitmap getBuffer() {
+        return buffer;
+    }
 
-    public GestureDetector getGestureDetector() { return gestureDetector; }
-    public ScaleGestureDetector getScaleGestureDetector() { return scaleGestureDetector; }
+    protected Simulation getSimulation() {
+        return simulation;
+    }
+
+    public GestureDetector getGestureDetector() {
+        return gestureDetector;
+    }
+
+    public ScaleGestureDetector getScaleGestureDetector() {
+        return scaleGestureDetector;
+    }
 
     private void init() {
 
@@ -49,7 +60,7 @@ public class SimView extends SurfaceView {
 
         surfaceHolder = getHolder();
 
-        simulation=new Simulation(this);
+        simulation = new Simulation(this);
 
         setOnTouchListener(simulation);
 
@@ -103,7 +114,7 @@ public class SimView extends SurfaceView {
         simulation.updateProperties(getWidth(), getHeight());
 
         if (buffer != null) {
-            simulation.drawMethod( getWidth(), getHeight());
+            simulation.drawMethod(getWidth(), getHeight());
             surfaceCanvas.drawBitmap(buffer, 0, 0, null);
         }
 

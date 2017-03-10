@@ -18,6 +18,7 @@ public class Worm {
     float segments[];
     float step = 1f;
     Worm targetting;
+    Worm nearestWorm;
 
     double state = 0;
 
@@ -68,6 +69,10 @@ public class Worm {
             segments[ss - 1] = x - 0.5f + (float) (Math.random());
         }
         update();
+    }
+
+    public double   distanceToWorm(Worm w) {
+        return Math.sqrt(x-w.x)*(x-w.x)+(y-w.y)*(y-w.y);
     }
 
     public void update() {

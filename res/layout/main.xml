@@ -7,6 +7,6 @@
 
     <com.robin.sim.SimView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:id="@+id/view" android:layout_gravity="center_horizontal"/>
+            android:layout_height="match_parent" android:id="@+id/simView" android:layout_gravity="center_horizontal"/>
 </LinearLayout>
 

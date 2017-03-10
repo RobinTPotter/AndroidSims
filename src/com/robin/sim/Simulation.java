@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by potterr on 03/03/2017.
@@ -17,12 +19,11 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     int initialWorms = 20;
     Worm selectedWorm;
     Paint blackpaint = new Paint();
-    float SELECT_BOX_SIZE=6;
+    float SELECT_BOX_SIZE = 6;
 
-    int OPTION_TARGET_NEAREST=1;
-    String OPTION_TARGET_NEAREST_TEXT="Set Target Nearest";
+    Map<Worm, Map<Worm, Double>> distances=new HashMap<Worm, Map<Worm, Double>>();
 
-
+    static String OPTION_TARGET_NEAREST_TEXT = "Set Target Nearest";
 
     public Simulation(SimView simView) {
         this.simView = simView;
@@ -47,13 +48,42 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         if (this.worms != null) {
             synchronized (worms) {
-                for (Worm w : this.worms) {
+                Worm w;
+                for (int ww = 0; ww < this.worms.size(); ww++) {
+                    w = this.worms.get(ww);
+
                     if (w != null) {
                         if (!w.alive) w.init(width, height);
                         w.update();
                     } else {
                         Log.d("Simulation", "worm is null " + w);
                     }
+                    for (int ww2 = ww + 1; ww2 < this.worms.size() - 1; ww2++) {
+                        if (ww2 < this.worms.size()) {
+
+                            Worm w2 = this.worms.get(ww2);
+                            double dist=w.distanceToWorm(w2);
+
+                            HashMap<Worm, Double> mp1 = new HashMap<Worm, Double>();
+                            mp1.put(w2, new Double(dist));
+                            distances.put(w, mp1);
+
+                            HashMap<Worm, Double> mp2 = new HashMap<Worm, Double>();
+                            mp2.put(w, new Double(dist));
+                            distances.put(w2, mp2);
+
+
+
+                        }
+                        if (w != null) {
+                            if (!w.alive) w.init(width, height);
+                            w.update();
+                        } else {
+                            Log.d("Simulation", "worm is null " + w);
+                        }
+
+                    }
+
                 }
             }
         } else {
@@ -74,12 +104,12 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
                 for (Worm w : worms) {
                     if (w != null)
                         w.draw(new Canvas(simView.getBuffer()));
-                        if (w==selectedWorm) {
-                            Paint green=new Paint();
-                            green.setARGB(255,0,255,0);
-                            green.setStyle(Paint.Style.STROKE);
-                            c.drawRect(new RectF(w.x-SELECT_BOX_SIZE,w.y-SELECT_BOX_SIZE,w.x+SELECT_BOX_SIZE,w.y+SELECT_BOX_SIZE),green);
-                        }
+                    if (w == selectedWorm) {
+                        Paint green = new Paint();
+                        green.setARGB(255, 0, 255, 0);
+                        green.setStyle(Paint.Style.STROKE);
+                        c.drawRect(new RectF(w.x - SELECT_BOX_SIZE, w.y - SELECT_BOX_SIZE, w.x + SELECT_BOX_SIZE, w.y + SELECT_BOX_SIZE), green);
+                    }
                 }
             }
         }
@@ -87,32 +117,19 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     }
 
 
+/*
+* actions*/
 
+    protected boolean action(String command) {
+        if (command.equals(OPTION_TARGET_NEAREST_TEXT)) {
+            if (selectedWorm != null) {
+                synchronized (worms) {
 
-    /*
-    menu stuff
-     */
+                }
 
-
-    public boolean onCreateOptionsMenu(Menu menu) {
-
-        if (menu.findItem(OPTION_TARGET_NEAREST) == null)
-            return createMenu(menu);
-        else return true;
-
-    }
-
-
-    public boolean createMenu(Menu menu) {
-
-        menu.clear();
-
-        int order = 0;
-
-        menu.add(0, Menu.NONE, order++, OPTION_TARGET_NEAREST_TEXT);
-
-
-        return true;
+            }
+        }
+        return false;
     }
 
     /*
@@ -142,7 +159,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         // simView.message("single tap up");
-        Worm w = findWorm(e.getX(), e.getY(),2* SELECT_BOX_SIZE*SELECT_BOX_SIZE);
+        Worm w = findWorm(e.getX(), e.getY(), 2 * SELECT_BOX_SIZE * SELECT_BOX_SIZE);
         selectedWorm = w;
         Log.i("Worm", "got worm" + w);
         if (w == null) {
@@ -218,7 +235,7 @@ interface methods WormWrangler
         w.targetx = x;
         w.targety = y;
         //set this worm alive to preserve x,y
-        w.alive=true;
+        w.alive = true;
         w.state = Math.random();
         w.speed = (float) (Math.random() * 1.5 + 0.5);
         w.initSegments();
