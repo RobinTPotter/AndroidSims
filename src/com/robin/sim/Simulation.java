@@ -2,10 +2,7 @@ package com.robin.sim;
 
 import android.graphics.*;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
-import android.view.View;
+import android.view.*;
 
 import java.util.ArrayList;
 
@@ -20,7 +17,12 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     int initialWorms = 20;
     Worm selectedWorm;
     Paint blackpaint = new Paint();
-    float SELECT_BOX_SIZE=4;
+    float SELECT_BOX_SIZE=6;
+
+    int OPTION_TARGET_NEAREST=1;
+    String OPTION_TARGET_NEAREST_TEXT="Set Target Nearest";
+
+
 
     public Simulation(SimView simView) {
         this.simView = simView;
@@ -84,6 +86,35 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     }
 
+
+
+
+    /*
+    menu stuff
+     */
+
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        if (menu.findItem(OPTION_TARGET_NEAREST) == null)
+            return createMenu(menu);
+        else return true;
+
+    }
+
+
+    public boolean createMenu(Menu menu) {
+
+        menu.clear();
+
+        int order = 0;
+
+        menu.add(0, Menu.NONE, order++, OPTION_TARGET_NEAREST_TEXT);
+
+
+        return true;
+    }
+
     /*
     gesture methods
      */
@@ -111,7 +142,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         // simView.message("single tap up");
-        Worm w = findWorm(e.getX(), e.getY(), 36);
+        Worm w = findWorm(e.getX(), e.getY(),2* SELECT_BOX_SIZE*SELECT_BOX_SIZE);
         selectedWorm = w;
         Log.i("Worm", "got worm" + w);
         if (w == null) {

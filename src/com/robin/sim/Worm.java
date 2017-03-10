@@ -17,6 +17,7 @@ public class Worm {
     float mag;
     float segments[];
     float step = 1f;
+    Worm targetting;
 
     double state = 0;
 
@@ -72,6 +73,12 @@ public class Worm {
     public void update() {
 
         if (!alive) return;
+
+        if (targetting!=null && targetting.alive) {
+            targetx=targetting.x;
+            targety=targetting.y;
+        }
+
         Log.d("Worm", "update worm");
 
         dirx = targetx - x;
