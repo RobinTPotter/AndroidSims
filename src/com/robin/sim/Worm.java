@@ -7,6 +7,7 @@ import android.util.Log;
 public class Worm {
 
     float x, y;
+    boolean alive = false;
     int size;
     float segsize = 8.0f;
     float targetx;
@@ -47,19 +48,30 @@ public class Worm {
 
     }
 
+    public void init(int width, int height) {
+        if (alive) return;
+        x = (float) (Math.random() * width);
+        y = (float) (Math.random() * height);
+        targetx=x;
+        targety=y;
+        alive = true;
+        initSegments();
+    }
+
     public void initSegments() {
 
         segments = new float[size * 2];
         int sss = 0;
         for (int ss = segments.length - 1; ss > 1; ss -= 2) {
-            segments[ss] = y - 0.5f +  (float)(Math.random());
-            segments[ss - 1] = x - 0.5f + (float)(Math.random());
+            segments[ss] = y - 0.5f + (float) (Math.random());
+            segments[ss - 1] = x - 0.5f + (float) (Math.random());
         }
         update();
     }
 
     public void update() {
 
+        if (!alive) return;
         Log.d("Worm", "update worm");
 
         dirx = targetx - x;
@@ -96,7 +108,7 @@ public class Worm {
         newsegments[0] = x;
         newsegments[1] = y;
 
-        for (int ss = 2; ss < segments.length ; ss += 4) {
+        for (int ss = 2; ss < segments.length; ss += 4) {
             float lastx = segments[ss - 2];
             float lasty = segments[ss - 1];
             float thisx = segments[ss];
@@ -109,7 +121,7 @@ public class Worm {
             newsegments[ss] = lastx + dirx2 * (segsize);// + speed);
             newsegments[ss + 1] = lasty + diry2 * (segsize);// + speed);
             if (ss + 3 < segments.length) {
-                newsegments[ss + 2]=newsegments[ss];
+                newsegments[ss + 2] = newsegments[ss];
                 newsegments[ss + 3] = newsegments[ss + 1];
             }
 
@@ -136,6 +148,7 @@ public class Worm {
 
     public void draw(Canvas c) {
 
+        if (!alive) return;
         Log.d("Worm", "draw worm");
         c.drawCircle(x, y, 2, p);
         c.drawLines(segments, p);
@@ -143,7 +156,9 @@ public class Worm {
 
     public interface WormWrangler {
         void setNewTarget(Worm w);
+
         void addWorm(int numToAdd);
-        Worm findWorm(float x, float y,float dist2);
+
+        Worm findWorm(float x, float y, float dist2);
     }
 }

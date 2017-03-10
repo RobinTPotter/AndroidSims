@@ -19,6 +19,8 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     int width, height;
     int initialWorms = 20;
     Worm selectedWorm;
+    Paint blackpaint = new Paint();
+    float SELECT_BOX_SIZE=4;
 
     public Simulation(SimView simView) {
         this.simView = simView;
@@ -45,6 +47,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
             synchronized (worms) {
                 for (Worm w : this.worms) {
                     if (w != null) {
+                        if (!w.alive) w.init(width, height);
                         w.update();
                     } else {
                         Log.d("Simulation", "worm is null " + w);
@@ -60,16 +63,21 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
     protected void drawMethod(int width, int height) {
 
-        Canvas c = new Canvas(simView.getBuffer());
-        Paint p = new Paint();
-        c.drawRect(0, 0, width, height, p);
-
         Log.d("Simulation", "draw");
+        Canvas c = new Canvas(simView.getBuffer());
+        c.drawRect(0, 0, width, height, blackpaint);
+
         if (worms != null) {
             synchronized (worms) {
                 for (Worm w : worms) {
                     if (w != null)
                         w.draw(new Canvas(simView.getBuffer()));
+                        if (w==selectedWorm) {
+                            Paint green=new Paint();
+                            green.setARGB(255,0,255,0);
+                            green.setStyle(Paint.Style.STROKE);
+                            c.drawRect(new RectF(w.x-SELECT_BOX_SIZE,w.y-SELECT_BOX_SIZE,w.x+SELECT_BOX_SIZE,w.y+SELECT_BOX_SIZE),green);
+                        }
                 }
             }
         }
@@ -103,7 +111,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         // simView.message("single tap up");
-        Worm w = findWorm(e.getX(), e.getY(), 16);
+        Worm w = findWorm(e.getX(), e.getY(), 36);
         selectedWorm = w;
         Log.i("Worm", "got worm" + w);
         if (w == null) {
@@ -161,10 +169,6 @@ interface methods WormWrangler
         for (int ww = 0; ww < numWorms; ww++) {
             Worm w = new Worm(this);
             w.size = (int) (30 * Math.random()) + 15;
-            w.x = 100;
-            w.y = 100;
-            w.targetx = 100;
-            w.targety = 100;
             w.state = Math.random();
             w.speed = (float) (Math.random() * 1.5 + 0.5);
             w.initSegments();
@@ -182,6 +186,8 @@ interface methods WormWrangler
         w.y = y;
         w.targetx = x;
         w.targety = y;
+        //set this worm alive to preserve x,y
+        w.alive=true;
         w.state = Math.random();
         w.speed = (float) (Math.random() * 1.5 + 0.5);
         w.initSegments();
