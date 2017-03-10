@@ -4,7 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
 
-public class Worm {
+public class Worm implements Comparable<Worm> {
 
     float x, y;
     boolean alive = false;
@@ -71,8 +71,11 @@ public class Worm {
         update();
     }
 
+    public double   distanceToWorm2(Worm w) {
+        return (x-w.x)*(x-w.x)+(y-w.y)*(y-w.y);
+    }
     public double   distanceToWorm(Worm w) {
-        return Math.sqrt(x-w.x)*(x-w.x)+(y-w.y)*(y-w.y);
+        return Math.sqrt(distanceToWorm2(w));
     }
 
     public void update() {
@@ -164,6 +167,10 @@ public class Worm {
         Log.d("Worm", "draw worm");
         c.drawCircle(x, y, 2, p);
         c.drawLines(segments, p);
+    }
+
+    public int compareTo(Worm another) {
+        return (int)(distanceToWorm2(another)*10);
     }
 
     public interface WormWrangler {

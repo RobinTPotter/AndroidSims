@@ -6,6 +6,7 @@ import android.view.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -21,7 +22,6 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     Paint blackpaint = new Paint();
     float SELECT_BOX_SIZE = 6;
 
-    Map<Worm, Map<Worm, Double>> distances=new HashMap<Worm, Map<Worm, Double>>();
 
     static String OPTION_TARGET_NEAREST_TEXT = "Set Target Nearest";
 
@@ -62,15 +62,9 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
                         if (ww2 < this.worms.size()) {
 
                             Worm w2 = this.worms.get(ww2);
+
+
                             double dist=w.distanceToWorm(w2);
-
-                            HashMap<Worm, Double> mp1 = new HashMap<Worm, Double>();
-                            mp1.put(w2, new Double(dist));
-                            distances.put(w, mp1);
-
-                            HashMap<Worm, Double> mp2 = new HashMap<Worm, Double>();
-                            mp2.put(w, new Double(dist));
-                            distances.put(w2, mp2);
 
 
 
