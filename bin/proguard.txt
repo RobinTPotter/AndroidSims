@@ -1,0 +1,6 @@
+# view AndroidManifest.xml #generated:8
+-keep class com.robin.sim.Sim { <init>(...); }
+
+# view res/layout/main.xml #generated:8
+-keep class com.robin.sim.SimView { <init>(...); }
+
