@@ -17,7 +17,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     SimView simView;
     ArrayList<Worm> worms = new ArrayList<Worm>();
     int width, height;
-    int initialWorms = 20;
+    int initialWorms = 10;
     Worm selectedWorm;
     Paint blackpaint = new Paint();
     float SELECT_BOX_SIZE = 6;
@@ -48,9 +48,9 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         if (this.worms != null) {
             synchronized (worms) {
-                Worm w;
-                for (int ww = 0; ww < this.worms.size(); ww++) {
-                    w = this.worms.get(ww);
+               
+                for (Worm w : worms) {
+                   
 
                     if (w != null) {
                         if (!w.alive) w.init(width, height);
@@ -58,25 +58,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
                     } else {
                         Log.d("Simulation", "worm is null " + w);
                     }
-                    for (int ww2 = ww + 1; ww2 < this.worms.size() - 1; ww2++) {
-                        if (ww2 < this.worms.size()) {
-
-                            Worm w2 = this.worms.get(ww2);
-
-
-                            double dist=w.distanceToWorm(w2);
-
-
-
-                        }
-                        if (w != null) {
-                            if (!w.alive) w.init(width, height);
-                            w.update();
-                        } else {
-                            Log.d("Simulation", "worm is null " + w);
-                        }
-
-                    }
+      
 
                 }
             }
