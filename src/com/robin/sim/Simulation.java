@@ -21,9 +21,10 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     Worm selectedWorm;
     Paint blackpaint = new Paint();
     float SELECT_BOX_SIZE = 6;
-
+    
 
     static String OPTION_TARGET_NEAREST_TEXT = "Set Target Nearest";
+    static String OPTION_UNSET_TARGET_TEXT="Unset Target";
 
     public Simulation(SimView simView) {
         this.simView = simView;
@@ -48,22 +49,16 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         if (this.worms != null) {
             synchronized (worms) {
-               
                 for (Worm w : worms) {
-                   
-
                     if (w != null) {
                         if (!w.alive) w.init(width, height);
                         w.update();
                     } else {
                         Log.d("Simulation", "worm is null " + w);
                     }
-      
-
                 }
             }
         } else {
-
             Log.d("Simulation", "worms null");
         }
 
@@ -100,7 +95,16 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         if (command.equals(OPTION_TARGET_NEAREST_TEXT)) {
             if (selectedWorm != null) {
                 synchronized (worms) {
+selectedWorm.nearestWorm=findAllWorms(selectedWorm,20).get(0);
+selectedWorm.targetting=selectedWorm.nearestWorm;
+                }
 
+            }
+        }  else      if (command.equals(OPTION_UNSET_TARGET_TEXT)) {
+            if (selectedWorm != null) {
+                synchronized (worms) {
+selectedWorm.nearestWorm=findAllWorms(selectedWorm,20).get(0);
+selectedWorm.targetting=null;
                 }
 
             }
@@ -138,9 +142,9 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         Worm w = findWorm(e.getX(), e.getY(), 2 * SELECT_BOX_SIZE * SELECT_BOX_SIZE);
         selectedWorm = w;
         Log.i("Worm", "got worm" + w);
-        if (w == null) {
-            selectedWorm = addWorm(e.getX(), e.getY());
-        }
+       
+           
+       
         return false;
     }
 
@@ -153,7 +157,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public void onLongPress(MotionEvent e) {
         //simView.message("long press");
-
+ selectedWorm = addWorm(e.getX(), e.getY());
     }
 
     @Override
@@ -240,6 +244,46 @@ interface methods WormWrangler
             }
         }
         return null;
+    }
+    
+    public ArrayList<Worm> findAllWorms(float x, float y, float dist2) {
+        ArrayList<Worm> list=new ArrayList<Worm>();
+        float lastnearest=-0;
+        
+        for (Worm w : worms) {
+            float d=distSquared(x, y, w.x, w.y);
+              if (d!=0.0f&&d < dist2) { //ie 4 px away
+                if (lastnearest==-1 || d<lastnearest) {
+                    list.add(0,w);
+                } else list.add(w);
+            }
+        }
+        return list;
+    }
+    
+    
+    public Worm findWorm(Worm wormy, float dist2) {
+
+        for (Worm w : worms) {
+            if (distSquared(wormy.x, wormy.y, w.x, w.y) < dist2) { //ie 4 px away
+                return w;
+            }
+        }
+        return null;
+    }
+    
+    public ArrayList<Worm> findAllWorms(Worm wormy, float dist2) {
+        ArrayList<Worm> list=new ArrayList<Worm>();
+        float lastnearest=-0;
+        for (Worm w : worms) {
+            float d=distSquared(wormy.x, wormy.y, w.x, w.y);
+            if (d!=0.0f && d < dist2) { //ie 4 px away
+                if (lastnearest==-1 || d<lastnearest) {
+                    list.add(0,w);
+                } else list.add(w);
+            }
+        }
+        return list;
     }
 
 }

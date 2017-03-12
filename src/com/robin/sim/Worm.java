@@ -19,6 +19,7 @@ public class Worm implements Comparable<Worm> {
     float step = 1f;
     Worm targetting;
     Worm nearestWorm;
+    float nearestWormDistance;
 
     double state = 0;
 
