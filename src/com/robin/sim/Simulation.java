@@ -20,8 +20,10 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     int initialWorms = 10;
     Worm selectedWorm;
     Paint blackpaint = new Paint();
-    float SELECT_BOX_SIZE = 6;
-    float SEEK_RADIUS=20;
+    float SELECT_BOX_SIZE = 50;
+    float SEEK_RADIUS=60;
+    boolean show_SEEK_RADIUS=true;
+    boolean show_SELECT_BOX_SIZE=true;
 
     static String OPTION_TARGET_NEAREST_TEXT = "Set Target Nearest";
     static String OPTION_UNSET_TARGET_TEXT = "Unset Target";
@@ -70,16 +72,25 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         Canvas c = new Canvas(simView.getBuffer());
         c.drawRect(0, 0, width, height, blackpaint);
 
+
         if (worms != null) {
             synchronized (worms) {
                 for (Worm w : worms) {
                     if (w != null)
                         w.draw(new Canvas(simView.getBuffer()));
                     if (w == selectedWorm) {
-                        Paint green = new Paint();
-                        green.setARGB(255, 0, 255, 0);
-                        green.setStyle(Paint.Style.STROKE);
-                        c.drawRect(new RectF(w.x - SELECT_BOX_SIZE, w.y - SELECT_BOX_SIZE, w.x + SELECT_BOX_SIZE, w.y + SELECT_BOX_SIZE), green);
+                        if (show_SELECT_BOX_SIZE) {
+                            Paint green = new Paint();
+                            green.setARGB(255, 0, 255, 0);
+                            green.setStyle(Paint.Style.STROKE);
+                            c.drawRect(new RectF(w.x - SELECT_BOX_SIZE, w.y - SELECT_BOX_SIZE, w.x + SELECT_BOX_SIZE, w.y + SELECT_BOX_SIZE), green);
+                        }
+                        if (show_SEEK_RADIUS) {
+                            Paint darkgreen = new Paint();
+                            darkgreen.setARGB(255,0,125,0);
+                            c.drawCircle(selectedWorm.x,selectedWorm.y,SEEK_RADIUS,darkgreen);
+                        }
+
                     }
                 }
             }
@@ -95,10 +106,6 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         if (command.equals(OPTION_TARGET_NEAREST_TEXT)) {
             if (selectedWorm != null) {
 
-                Canvas c = new Canvas(simView.getBuffer());
-                Paint p=new Paint();
-                p.setColor(Color.GREEN);
-                c.drawCircle(selectedWorm.x,selectedWorm.y,SEEK_RADIUS,p);
 
                 synchronized (worms) {
                     ArrayList<Worm> f = findAllWorms(selectedWorm, SEEK_RADIUS*SEEK_RADIUS);
@@ -113,6 +120,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
             if (selectedWorm != null) {
                 synchronized (worms) {
                     selectedWorm.targetting = null;
+                    setNewTarget(selectedWorm);
                 }
 
             }
@@ -147,7 +155,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
         // simView.message("single tap up");
-        Worm w = findWorm(e.getX(), e.getY(), 2 * SELECT_BOX_SIZE * SELECT_BOX_SIZE);
+        Worm w = findWorm(e.getX(), e.getY(), SELECT_BOX_SIZE * SELECT_BOX_SIZE);
         selectedWorm = w;
         Log.i("Worm", "got worm" + w);
 

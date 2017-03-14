@@ -55,8 +55,8 @@ public class Worm implements Comparable<Worm> {
         if (alive) return;
         x = (float) (Math.random() * width);
         y = (float) (Math.random() * height);
-        targetx=x;
-        targety=y;
+        targetx = x;
+        targety = y;
         alive = true;
         initSegments();
     }
@@ -72,10 +72,11 @@ public class Worm implements Comparable<Worm> {
         update();
     }
 
-    public double   distanceToWorm2(Worm w) {
-        return (x-w.x)*(x-w.x)+(y-w.y)*(y-w.y);
+    public double distanceToWorm2(Worm w) {
+        return (x - w.x) * (x - w.x) + (y - w.y) * (y - w.y);
     }
-    public double   distanceToWorm(Worm w) {
+
+    public double distanceToWorm(Worm w) {
         return Math.sqrt(distanceToWorm2(w));
     }
 
@@ -83,9 +84,9 @@ public class Worm implements Comparable<Worm> {
 
         if (!alive) return;
 
-        if (targetting!=null && targetting.alive) {
-            targetx=targetting.x;
-            targety=targetting.y;
+        if (targetting != null && targetting.alive) {
+            targetx = targetting.x;
+            targety = targetting.y;
         }
 
         Log.d("Worm", "update worm");
@@ -171,7 +172,7 @@ public class Worm implements Comparable<Worm> {
     }
 
     public int compareTo(Worm another) {
-        return (int)(distanceToWorm2(another)*10);
+        return (int) (distanceToWorm2(another) * 10);
     }
 
     public interface WormWrangler {
