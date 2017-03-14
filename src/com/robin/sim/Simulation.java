@@ -73,7 +73,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         c.drawRect(0, 0, width, height, blackpaint);
 
         if (selectedWorm != null) {
-            if (show_SEEK_RADIUS) {
+            if (show_SEEK_RADIUS && selectedWorm.targetting == null) {
                 Paint darkgreen = new Paint();
                 darkgreen.setARGB(255, 0, 85, 0);
                 c.drawCircle(selectedWorm.x, selectedWorm.y, SEEK_RADIUS, darkgreen);
@@ -117,8 +117,8 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         } else if (command.equals(OPTION_UNSET_TARGET_TEXT)) {
             if (selectedWorm != null) {
                 synchronized (worms) {
-                    selectedWorm.targetting = null;
                     setNewTarget(selectedWorm);
+                    selectedWorm.targetting = null;
                 }
 
             }
@@ -157,7 +157,8 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         if (wms != null) {
             selectedWorm = wms.get(0);
             Log.i("Worm", "got worm" + selectedWorm);
-        }
+        }else  selectedWorm=null;
+
         return false;
     }
 

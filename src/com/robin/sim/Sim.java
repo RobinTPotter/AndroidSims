@@ -9,7 +9,6 @@ import android.view.MenuItem;
 
 public class Sim extends Activity {
 
-
     /**
      * Called when the activity is first created.
      */
@@ -53,11 +52,13 @@ public class Sim extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         boolean success = false;
-        Simulation sim =((SimView)findViewById(R.id.simView)).getSimulation();
+        Simulation sim = ((SimView) findViewById(R.id.simView)).getSimulation();
 
         /// Handle item selection
-        if (item.getTitle().equals(Simulation.OPTION_TARGET_NEAREST_TEXT) ) {
-            success= sim.action(Simulation.OPTION_TARGET_NEAREST_TEXT);
+        if (item.getTitle().equals(Simulation.OPTION_TARGET_NEAREST_TEXT)) {
+            success = sim.action(Simulation.OPTION_TARGET_NEAREST_TEXT);
+        } else if (item.getTitle().equals(Simulation.OPTION_UNSET_TARGET_TEXT)) {
+            success = sim.action(Simulation.OPTION_UNSET_TARGET_TEXT);
         }
         return success;
     }
