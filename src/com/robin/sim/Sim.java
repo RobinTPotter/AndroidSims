@@ -44,6 +44,7 @@ public class Sim extends Activity {
         int order = 0;
 
         menu.add(0, Menu.NONE, order++, Simulation.OPTION_TARGET_NEAREST_TEXT);
+        menu.add(0, Menu.NONE, order++, Simulation.OPTION_UNSET_TARGET_TEXT);
 
         return true;
     }

@@ -21,10 +21,10 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     Worm selectedWorm;
     Paint blackpaint = new Paint();
     float SELECT_BOX_SIZE = 6;
-    
+    float SEEK_RADIUS=20;
 
     static String OPTION_TARGET_NEAREST_TEXT = "Set Target Nearest";
-    static String OPTION_UNSET_TARGET_TEXT="Unset Target";
+    static String OPTION_UNSET_TARGET_TEXT = "Unset Target";
 
     public Simulation(SimView simView) {
         this.simView = simView;
@@ -94,17 +94,25 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     protected boolean action(String command) {
         if (command.equals(OPTION_TARGET_NEAREST_TEXT)) {
             if (selectedWorm != null) {
+
+                Canvas c = new Canvas(simView.getBuffer());
+                Paint p=new Paint();
+                p.setColor(Color.GREEN);
+                c.drawCircle(selectedWorm.x,selectedWorm.y,SEEK_RADIUS,p);
+
                 synchronized (worms) {
-selectedWorm.nearestWorm=findAllWorms(selectedWorm,20).get(0);
-selectedWorm.targetting=selectedWorm.nearestWorm;
+                    ArrayList<Worm> f = findAllWorms(selectedWorm, SEEK_RADIUS*SEEK_RADIUS);
+                    if (f != null) {
+                        selectedWorm.nearestWorm = f.get(0);
+                        selectedWorm.targetting = selectedWorm.nearestWorm;
+                    }
                 }
 
             }
-        }  else      if (command.equals(OPTION_UNSET_TARGET_TEXT)) {
+        } else if (command.equals(OPTION_UNSET_TARGET_TEXT)) {
             if (selectedWorm != null) {
                 synchronized (worms) {
-selectedWorm.nearestWorm=findAllWorms(selectedWorm,20).get(0);
-selectedWorm.targetting=null;
+                    selectedWorm.targetting = null;
                 }
 
             }
@@ -142,9 +150,7 @@ selectedWorm.targetting=null;
         Worm w = findWorm(e.getX(), e.getY(), 2 * SELECT_BOX_SIZE * SELECT_BOX_SIZE);
         selectedWorm = w;
         Log.i("Worm", "got worm" + w);
-       
-           
-       
+
         return false;
     }
 
@@ -157,7 +163,7 @@ selectedWorm.targetting=null;
     @Override
     public void onLongPress(MotionEvent e) {
         //simView.message("long press");
- selectedWorm = addWorm(e.getX(), e.getY());
+        selectedWorm = addWorm(e.getX(), e.getY());
     }
 
     @Override
@@ -245,23 +251,23 @@ interface methods WormWrangler
         }
         return null;
     }
-    
+
     public ArrayList<Worm> findAllWorms(float x, float y, float dist2) {
-        ArrayList<Worm> list=new ArrayList<Worm>();
-        float lastnearest=-0;
-        
+        ArrayList<Worm> list = new ArrayList<Worm>();
+        float lastnearest = -0;
+
         for (Worm w : worms) {
-            float d=distSquared(x, y, w.x, w.y);
-              if (d!=0.0f&&d < dist2) { //ie 4 px away
-                if (lastnearest==-1 || d<lastnearest) {
-                    list.add(0,w);
+            float d = distSquared(x, y, w.x, w.y);
+            if (d != 0.0f && d < dist2) { //ie 4 px away
+                if (lastnearest == -1 || d < lastnearest) {
+                    list.add(0, w);
                 } else list.add(w);
             }
         }
-        return list;
+        if (list.size() > 0) return list;
+        else return null;
     }
-    
-    
+
     public Worm findWorm(Worm wormy, float dist2) {
 
         for (Worm w : worms) {
@@ -271,19 +277,20 @@ interface methods WormWrangler
         }
         return null;
     }
-    
+
     public ArrayList<Worm> findAllWorms(Worm wormy, float dist2) {
-        ArrayList<Worm> list=new ArrayList<Worm>();
-        float lastnearest=-0;
+        ArrayList<Worm> list = new ArrayList<Worm>();
+        float lastnearest = -0;
         for (Worm w : worms) {
-            float d=distSquared(wormy.x, wormy.y, w.x, w.y);
-            if (d!=0.0f && d < dist2) { //ie 4 px away
-                if (lastnearest==-1 || d<lastnearest) {
-                    list.add(0,w);
+            float d = distSquared(wormy.x, wormy.y, w.x, w.y);
+            if (d != 0.0f && d < dist2) { //ie 4 px away
+                if (lastnearest == -1 || d < lastnearest) {
+                    list.add(0, w);
                 } else list.add(w);
             }
         }
-        return list;
+        if (list.size() > 0) return list;
+        else return null;
     }
 
 }
