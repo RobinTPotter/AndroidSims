@@ -11,13 +11,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1dc6a925-0bc1-41f5-b5d9-4bbd01759b26" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/robin/sim/WormTarget.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.apk" afterPath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.apk" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.unaligned.apk" afterPath="$PROJECT_DIR$/out/production/AndroidSims/AndroidSims.unaligned.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Sim.class" afterPath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Sim.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Simulation.class" afterPath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Simulation.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Worm$WormWrangler.class" afterPath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Worm$WormWrangler.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Worm.class" afterPath="$PROJECT_DIR$/out/production/AndroidSims/com/robin/sim/Worm.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/robin/sim/Sim.java" afterPath="$PROJECT_DIR$/src/com/robin/sim/Sim.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" afterPath="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/robin/sim/Worm.java" afterPath="$PROJECT_DIR$/src/com/robin/sim/Worm.java" />
     </list>
     <ignored path="Sim.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,11 +41,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Sim.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Sim.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Sim.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.50913244">
-              <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="47" column="20" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -55,16 +57,10 @@
         <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimView.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
+              <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
               <folding>
-                <element signature="e#994#995#0" expanded="true" />
-                <element signature="e#1023#1024#0" expanded="true" />
                 <element signature="e#1067#1068#0" expanded="true" />
                 <element signature="e#1100#1101#0" expanded="true" />
-                <element signature="e#1151#1152#0" expanded="true" />
-                <element signature="e#1189#1190#0" expanded="true" />
-                <element signature="e#1250#1251#0" expanded="true" />
-                <element signature="e#1293#1294#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,68 +89,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Simulation.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Simulation.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Simulation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="103" column="26" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.69796956">
+              <caret line="355" column="38" selection-start-line="355" selection-start-column="38" selection-end-line="355" selection-end-column="38" />
               <folding>
-                <element signature="e#469#475#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HashMap.java" pinned="false" current-in-tab="false">
-        <entry file="file://C:/__utils/Android/sdk/sources/android-19/java/util/HashMap.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="124" column="11" selection-start-line="124" selection-start-column="11" selection-end-line="124" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#35091#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#9871#9872#0" expanded="false" />
-                <element signature="e#9903#9904#0" expanded="false" />
-                <element signature="e#10063#10064#0" expanded="false" />
-                <element signature="e#10090#10091#0" expanded="false" />
-                <element signature="e#17275#17276#0" expanded="false" />
-                <element signature="e#17353#17354#0" expanded="false" />
-                <element signature="e#26129#26130#0" expanded="false" />
-                <element signature="e#26163#26164#0" expanded="false" />
-                <element signature="e#26200#26201#0" expanded="false" />
-                <element signature="e#26236#26237#0" expanded="false" />
-                <element signature="e#26923#26924#0" expanded="false" />
-                <element signature="e#26971#26972#0" expanded="false" />
-                <element signature="e#27569#27570#0" expanded="false" />
-                <element signature="e#27617#27618#0" expanded="false" />
-                <element signature="e#31479#31480#0" expanded="false" />
-                <element signature="e#31526#31527#0" expanded="false" />
-                <element signature="e#31554#31555#0" expanded="false" />
-                <element signature="e#31589#31590#0" expanded="false" />
-                <element signature="e#31624#31625#0" expanded="false" />
-                <element signature="e#31664#31665#0" expanded="false" />
-                <element signature="e#31708#31709#0" expanded="false" />
-                <element signature="e#31753#31754#0" expanded="false" />
-                <element signature="e#31939#31940#0" expanded="false" />
-                <element signature="e#31983#31984#0" expanded="false" />
-                <element signature="e#32093#32094#0" expanded="false" />
-                <element signature="e#32142#32143#0" expanded="false" />
-                <element signature="e#32170#32171#0" expanded="false" />
-                <element signature="e#32205#32206#0" expanded="false" />
-                <element signature="e#32240#32241#0" expanded="false" />
-                <element signature="e#32280#32281#0" expanded="false" />
-                <element signature="e#32324#32325#0" expanded="false" />
-                <element signature="e#32371#32372#0" expanded="false" />
-                <element signature="e#32401#32402#0" expanded="false" />
-                <element signature="e#32445#32446#0" expanded="false" />
-                <element signature="e#32570#32571#0" expanded="false" />
-                <element signature="e#32619#32620#0" expanded="false" />
-                <element signature="e#33102#33103#0" expanded="false" />
-                <element signature="e#33137#33138#0" expanded="false" />
-                <element signature="e#33172#33173#0" expanded="false" />
-                <element signature="e#33212#33213#0" expanded="false" />
-                <element signature="e#33242#33243#0" expanded="false" />
-                <element signature="e#33286#33287#0" expanded="false" />
+                <element signature="e#450#462#0" expanded="true" />
+                <element signature="e#11558#11564#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -164,7 +106,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Worm.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+              <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -197,9 +139,10 @@
         <option value="$PROJECT_DIR$/res/layout/main.xml" />
         <option value="$PROJECT_DIR$/src/com/robin/sim/SimView.java" />
         <option value="$PROJECT_DIR$/src/etst.xml" />
+        <option value="$PROJECT_DIR$/src/com/robin/sim/Sim.java" />
+        <option value="$PROJECT_DIR$/src/com/robin/sim/WormTarget.java" />
         <option value="$PROJECT_DIR$/src/com/robin/sim/Worm.java" />
         <option value="$PROJECT_DIR$/src/com/robin/sim/Simulation.java" />
-        <option value="$PROJECT_DIR$/src/com/robin/sim/Sim.java" />
       </list>
     </option>
   </component>
@@ -633,27 +576,27 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39381722" sideWeight="0.51028275" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44354838" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44354838" sideWeight="0.4922879" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37365592" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39381722" sideWeight="0.48971722" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293011" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49596775" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49596775" sideWeight="0.49485862" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -669,7 +612,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="20" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/robin/sim/Simulation.java</url>
+          <line>238</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="25" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -693,14 +644,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
           <folding>
-            <element signature="e#994#995#0" expanded="true" />
-            <element signature="e#1023#1024#0" expanded="true" />
             <element signature="e#1067#1068#0" expanded="true" />
             <element signature="e#1100#1101#0" expanded="true" />
-            <element signature="e#1151#1152#0" expanded="true" />
-            <element signature="e#1189#1190#0" expanded="true" />
-            <element signature="e#1250#1251#0" expanded="true" />
-            <element signature="e#1293#1294#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -729,7 +674,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#469#475#0" expanded="true" />
+            <element signature="e#450#462#0" expanded="true" />
+            <element signature="e#11558#11564#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -812,14 +758,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="111" column="16" selection-start-line="111" selection-start-column="16" selection-end-line="111" selection-end-column="16" />
           <folding>
-            <element signature="e#994#995#0" expanded="true" />
-            <element signature="e#1023#1024#0" expanded="true" />
             <element signature="e#1067#1068#0" expanded="true" />
             <element signature="e#1100#1101#0" expanded="true" />
-            <element signature="e#1151#1152#0" expanded="true" />
-            <element signature="e#1189#1190#0" expanded="true" />
-            <element signature="e#1250#1251#0" expanded="true" />
-            <element signature="e#1293#1294#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -845,7 +785,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#469#475#0" expanded="true" />
+            <element signature="e#450#462#0" expanded="true" />
+            <element signature="e#11558#11564#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -879,14 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="57" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.74271846">
@@ -904,23 +837,6 @@
       </provider>
       <provider editor-type-id="android-designer">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="26" selection-start-line="43" selection-start-column="26" selection-end-line="43" selection-end-column="26" />
-          <folding>
-            <element signature="e#994#995#0" expanded="true" />
-            <element signature="e#1023#1024#0" expanded="true" />
-            <element signature="e#1067#1068#0" expanded="true" />
-            <element signature="e#1100#1101#0" expanded="true" />
-            <element signature="e#1151#1152#0" expanded="true" />
-            <element signature="e#1189#1190#0" expanded="true" />
-            <element signature="e#1250#1251#0" expanded="true" />
-            <element signature="e#1293#1294#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://C:/__utils/Android/sdk/sources/android-19/java/util/HashMap.java">
@@ -976,32 +892,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Sim.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="20" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/WormTarget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/__utils/Android/sdk/sources/android-19/android/graphics/Paint.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="163" column="6" selection-start-line="163" selection-start-column="6" selection-end-line="163" selection-end-column="6" />
+          <folding>
+            <element signature="e#12700#12701#0" expanded="false" />
+            <element signature="e#12723#12724#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="57" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Worm.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+          <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/SimView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="117" column="0" selection-start-line="117" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
+          <folding>
+            <element signature="e#1067#1068#0" expanded="true" />
+            <element signature="e#1100#1101#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Simulation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="103" column="26" selection-start-line="103" selection-start-column="26" selection-end-line="103" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.69796956">
+          <caret line="355" column="38" selection-start-line="355" selection-start-column="38" selection-end-line="355" selection-end-column="38" />
           <folding>
-            <element signature="e#469#475#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/robin/sim/Sim.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.50913244">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#450#462#0" expanded="true" />
+            <element signature="e#11558#11564#0" expanded="true" />
           </folding>
         </state>
       </provider>

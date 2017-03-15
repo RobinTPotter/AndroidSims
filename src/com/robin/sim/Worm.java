@@ -4,7 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.Log;
 
-public class Worm implements Comparable<Worm> {
+import java.util.ArrayList;
+
+public class Worm implements Comparable<Worm>, WormTarget {
 
     float x, y;
     boolean alive = false;
@@ -17,7 +19,7 @@ public class Worm implements Comparable<Worm> {
     float mag;
     float segments[];
     float step = 1f;
-    Worm targetting;
+    WormTarget targetting;
     Worm nearestWorm;
     float nearestWormDistance;
 
@@ -36,13 +38,13 @@ public class Worm implements Comparable<Worm> {
         int rr = 0, gg = 0, bb = 0;
         float ll = 0;
 
-        while (ll < 0.5) {
+        while (ll < 0.75) {
 
             rr = (int) (Math.random() * 255);
             gg = (int) (Math.random() * 255);
             bb = (int) (Math.random() * 255);
 
-            ll = (0.2126f * rr + 0.7152f * gg + 0.0722f * bb);
+            ll = (0.2126f * (float)rr + 0.7152f * (float)gg + 0.0722f * (float)bb);
         }
 
         p.setARGB(255, rr, gg, bb);
@@ -50,6 +52,11 @@ public class Worm implements Comparable<Worm> {
         segments = new float[size * 2];
 
     }
+
+
+    public float     getX() { return x; }
+    public float     getY() { return y; }
+    public boolean isAlive() { return  alive; }
 
     public void init(int width, int height) {
         if (alive) return;
@@ -76,17 +83,14 @@ public class Worm implements Comparable<Worm> {
         return (x - w.x) * (x - w.x) + (y - w.y) * (y - w.y);
     }
 
-    public double distanceToWorm(Worm w) {
-        return Math.sqrt(distanceToWorm2(w));
-    }
 
     public void update() {
 
         if (!alive) return;
 
-        if (targetting != null && targetting.alive) {
-            targetx = targetting.x;
-            targety = targetting.y;
+        if (targetting != null && targetting.isAlive()) {
+            targetx = targetting.getX();
+            targety = targetting.getY();
         }
 
         Log.d("Worm", "update worm");
@@ -172,14 +176,14 @@ public class Worm implements Comparable<Worm> {
     }
 
     public int compareTo(Worm another) {
-        return (int) (distanceToWorm2(another) * 10);
+        return (int) (distanceToWorm2(another) * 100);
     }
 
     public interface WormWrangler {
         void setNewTarget(Worm w);
-
         void addWorm(int numToAdd);
-
         Worm findWorm(float x, float y, float dist2);
+        ArrayList<Worm> findAllWorms(float x, float y, float dist2);
     }
+
 }
