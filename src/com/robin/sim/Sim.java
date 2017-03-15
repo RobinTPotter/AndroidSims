@@ -44,6 +44,7 @@ public class Sim extends Activity {
 
         menu.add(0, Menu.NONE, order++, Simulation.OPTION_TARGET_NEAREST_TEXT);
         menu.add(0, Menu.NONE, order++, Simulation.OPTION_UNSET_TARGET_TEXT);
+        menu.add(0, Menu.NONE, order++, Simulation.OPTION_WORMBURST_TEXT);
 
         return true;
     }
@@ -59,6 +60,8 @@ public class Sim extends Activity {
             success = sim.action(Simulation.OPTION_TARGET_NEAREST_TEXT);
         } else if (item.getTitle().equals(Simulation.OPTION_UNSET_TARGET_TEXT)) {
             success = sim.action(Simulation.OPTION_UNSET_TARGET_TEXT);
+        }else if (item.getTitle().equals(Simulation.OPTION_WORMBURST_TEXT)) {
+            success = sim.action(Simulation.OPTION_WORMBURST_TEXT);
         }
         return success;
     }

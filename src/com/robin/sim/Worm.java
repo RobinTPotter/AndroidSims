@@ -23,7 +23,6 @@ public class Worm implements Comparable<Worm>, WormTarget {
     Worm nearestWorm;
     float nearestWormDistance;
 
-    double state = 0;
 
     float speed = 0.5f;
 
@@ -34,6 +33,9 @@ public class Worm implements Comparable<Worm>, WormTarget {
 
         Log.d("Worm", "Create worm");
         this.wormWrangler = ww;
+
+        this.size = (int) (30 * Math.random()) + 15;
+        this.speed = (float) (Math.random() * 1.5 + 0.5);
 
         int rr = 0, gg = 0, bb = 0;
         float ll = 0;
@@ -181,7 +183,8 @@ public class Worm implements Comparable<Worm>, WormTarget {
 
     public interface WormWrangler {
         void setNewTarget(Worm w);
-        void addWorm(int numToAdd);
+        Worm[] addWorm(int numToAdd);
+        Worm addWorm(float x, float y);
         Worm findWorm(float x, float y, float dist2);
         ArrayList<Worm> findAllWorms(float x, float y, float dist2);
     }

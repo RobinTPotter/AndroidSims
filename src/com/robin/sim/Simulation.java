@@ -24,11 +24,11 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     Map<String, Paint> pallette;
 
     /**
-     *
      * static string for menu options
      */
     static String OPTION_TARGET_NEAREST_TEXT = "Set Target Nearest";
     static String OPTION_UNSET_TARGET_TEXT = "Unset Target";
+    static String OPTION_WORMBURST_TEXT = "Burst Settings";
 
     /**
      * static string for paintable options
@@ -41,8 +41,19 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     /**
      * static string for custom colours
      */
-    static String UNDERLAY_GREEN="UNDERLAY_GREEN";
-    static String SELECTED_GREEN="SELECTED_GREEN";
+    static String UNDERLAY_GREEN = "UNDERLAY_GREEN";
+    static String SELECTED_GREEN = "SELECTED_GREEN";
+
+    /**
+     * burst options
+     */
+
+    static String BURST_TYPE_SCATTER = "BURST_TYPE_SCATTER";
+    static String BURST_TYPE_RADIAL = "BURST_TYPE_RADIAL";
+    static String BURST_TYPE_SEEK = "BURST_TYPE_SEEK";
+
+    int burstSize = 10;
+    String burstStyle = BURST_TYPE_RADIAL;
 
     /**
      * designed to place markers under or over the objects in the simulation.
@@ -52,7 +63,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         String name;
         float value;
-        boolean on=true;
+        boolean on = true;
         boolean overlay;
         String colour;
         String shape;
@@ -75,10 +86,9 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     }
 
     /**
-     *
-     * @param r red int
-     * @param g green int
-     * @param b blue int
+     * @param r     red int
+     * @param g     green int
+     * @param b     blue int
      * @param style paint style object FILL or STROKE etc..
      * @return Paint object for colluring in stuff
      */
@@ -92,6 +102,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     /**
      * constructor for the simulation allows contact between main app activity (for menu etc)
      * sets up the hashmaps for optional paintable decorations and sets up the colour pallette.
+     *
      * @param simView
      */
     public Simulation(SimView simView) {
@@ -102,7 +113,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         pallette.put(UNDERLAY_GREEN, newPaint(0, 75, 0, Paint.Style.FILL));
 
         options = new HashMap<String, PaintableOption>();
-        options.put(SEEK_RADIUS, new PaintableOption(SEEK_RADIUS, 80, false,UNDERLAY_GREEN, FILLED_CIRCLE));
+        options.put(SEEK_RADIUS, new PaintableOption(SEEK_RADIUS, 80, false, UNDERLAY_GREEN, FILLED_CIRCLE));
         options.put(SELECT_BOX, new PaintableOption(SELECT_BOX, 30, true, SELECTED_GREEN, STROKED_RECTANGLE));
 
         Log.d("Simulation", "Create Simulation");
@@ -203,6 +214,12 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
                 }
 
             }
+        } else if (command.equals(OPTION_WORMBURST_TEXT)) {
+            synchronized (objects) {
+                (new Settings(simView.getContext(),this)).show();
+
+
+            }
         }
         return false;
     }
@@ -252,7 +269,24 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     @Override
     public void onLongPress(MotionEvent e) {
         //simView.message("long press");
-        selectedWorm = addWorm(e.getX(), e.getY());
+        double rad = 2 * Math.PI / burstSize;
+        double ang = Math.random() * rad;
+        Worm[] newworms = addWorm(burstSize);
+        for (Worm w : newworms) {
+            w.alive=true;
+            w.x = e.getX();
+            w.y = e.getY();
+            if (burstStyle.equals(BURST_TYPE_RADIAL)) {
+                w.targetx = (float) (w.x + 2 * Math.cos(ang));
+                w.targety = (float) (w.y + 2 * Math.sin(ang));
+                ang += rad;
+            } else if (burstStyle.equals(BURST_TYPE_SCATTER)) {
+            } else if (burstStyle.equals(BURST_TYPE_SEEK)) {
+                w.targetting = selectedWorm;
+            }
+            w.initSegments();
+
+        }
     }
 
     @Override
@@ -287,32 +321,37 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 interface methods WormWrangler
  */
 
-    public void addWorm(int numWorms) {
+    /**
+     * add a nuber of worms, these are created un-alive  and must be init()ed
+     * at this time the worms are given position
+     *
+     * @param numWorms
+     */
+    public Worm[] addWorm(int numWorms) {
+
+        Worm[] addedWorms = new Worm[numWorms];
 
         for (int ww = 0; ww < numWorms; ww++) {
             Worm w = new Worm(this);
-            w.size = (int) (30 * Math.random()) + 15;
-            w.state = Math.random();
-            w.speed = (float) (Math.random() * 1.5 + 0.5);
-            w.initSegments();
-            objects.add(w);
+            synchronized (objects) {
+                objects.add(w);
+            }
             Log.d("Simulation", "worm is " + w);
+            addedWorms[ww] = w;
         }
+        return addedWorms;
 
     }
 
     public Worm addWorm(float x, float y) {
 
         Worm w = new Worm(this);
-        w.size = (int) (30 * Math.random()) + 15;
         w.x = x;
         w.y = y;
         w.targetx = x;
         w.targety = y;
         //set this worm alive to preserve x,y
         w.alive = true;
-        w.state = Math.random();
-        w.speed = (float) (Math.random() * 1.5 + 0.5);
         w.initSegments();
 
         synchronized (objects) {
@@ -346,14 +385,13 @@ interface methods WormWrangler
         ArrayList list = new ArrayList();
         float lastnearest = -1;
 
-
         for (WormTarget t : objects) {
             if (t.getClass().getName().equals(type.getName())) {
 
                 float d = distSquared(x, y, t.getX(), t.getY());
                 if (d != 0.0f && d < dist2) { //ie 4 px away
                     if (lastnearest == -1 || d < lastnearest) {
-                        lastnearest=d;
+                        lastnearest = d;
                         list.add(0, t);
                     } else list.add(t);
                 }
@@ -366,29 +404,9 @@ interface methods WormWrangler
 
     public ArrayList<Worm> findAllWorms(float x, float y, float dist2) {
         return (ArrayList<Worm>) findAll(x, y, dist2, Worm.class);
-
-        /*
-        ArrayList<Worm> list = new ArrayList<Worm>();
-        float lastnearest = -1;
-
-        for (WormTarget _w : objects) {
-            if (_w instanceof Worm) {
-                Worm w = (Worm) _w;
-                float d = distSquared(x, y, w.x, w.y);
-                if (d != 0.0f && d < dist2) { //ie 4 px away
-                    if (lastnearest == -1 || d < lastnearest) {
-                        list.add(0, w);
-                    } else list.add(w);
-                }
-            }
-        }
-        if (list.size() > 0) return list;
-        else return null;
-        */
     }
 
     public Worm findWorm(Worm wormy, float dist2) {
-
         for (WormTarget w : objects) {
             if (w instanceof Worm && distSquared(wormy.x, wormy.y, w.getX(), w.getY()) < dist2) { //ie 4 px away
                 return (Worm) w;
