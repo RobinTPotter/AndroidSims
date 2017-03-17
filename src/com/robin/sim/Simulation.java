@@ -1,12 +1,11 @@
 package com.robin.sim;
 
 import android.graphics.*;
+import android.os.Message;
 import android.util.Log;
 import android.view.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by potterr on 03/03/2017.
@@ -133,25 +132,30 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         this.width = width;
         this.height = height;
-
-        if (this.objects != null) {
-            synchronized (objects) {
-                for (WormTarget w : objects) {
-                    if (w != null) {
-                        if (w instanceof Worm) {
-                            Worm worm = (Worm) w;
-                            if (!w.isAlive()) worm.init(width, height);
-                            worm.update();
-                        }
-                    } else {
-                        Log.d("Simulation", "worm is null " + w);
+try {
+    if (this.objects != null) {
+        synchronized (objects) {
+            for (Iterator<WormTarget> o = objects.iterator(); o.hasNext(); ) {
+                WormTarget w = o.next();
+                if (w != null) {
+                    if (w instanceof Worm) {
+                        Worm worm = (Worm) w;
+                        if (!w.isAlive()) worm.init(width, height);
+                        worm.update();
                     }
+                } else {
+                    Log.d("Simulation", "worm is null " + w);
                 }
             }
-        } else {
-            Log.d("Simulation", "objects null");
         }
-
+    } else {
+        Log.d("Simulation", "objects null");
+    }
+} catch (ConcurrentModificationException e) {
+    //simView.message(e.getMessage());
+    Message message = simView.mHandler.obtainMessage(0, e.getMessage());
+    message.sendToTarget();
+}
     }
 
     protected void drawMethod(int width, int height) {
@@ -415,10 +419,12 @@ interface methods WormWrangler
                         Worm w =(Worm)o;
                         if (w.targetting==target) {
                             w.targetting=null;
+
                         }
                     }
                 }
                 worm.eaten++;
+                selectedWorm=null;
             } else {
                 worm.reproduced++;
                 if (target instanceof Worm) {

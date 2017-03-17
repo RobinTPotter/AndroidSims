@@ -2,6 +2,8 @@ package com.robin.sim;
 
 import android.content.Context;
 import android.graphics.*;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.ScaleGestureDetector;
@@ -20,6 +22,7 @@ public class SimView extends SurfaceView {
     private Simulation simulation;
     GestureDetector gestureDetector;
     ScaleGestureDetector scaleGestureDetector;
+    Handler mHandler;
 
     public SimView(Context context) {
         super(context);
@@ -107,6 +110,15 @@ public class SimView extends SurfaceView {
                 }
             }
         });
+
+
+        mHandler = new Handler(Looper.getMainLooper()) {
+            public void handleMessage(String message) {
+                // This is where you do your work in the UI thread.
+                // Your worker tells you in the message what to do.
+                message(message);
+            }
+        };
     }
 
     protected void drawSomething(Canvas surfaceCanvas) {
@@ -119,6 +131,8 @@ public class SimView extends SurfaceView {
         }
 
     }
+
+
 
     public void message(CharSequence text) {
 
