@@ -216,8 +216,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
             }
         } else if (command.equals(OPTION_WORMBURST_TEXT)) {
             synchronized (objects) {
-                (new Settings(simView.getContext(),this)).show();
-
+                (new Settings(simView.getContext(), this)).show();
 
             }
         }
@@ -273,7 +272,7 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         double ang = Math.random() * rad;
         Worm[] newworms = addWorm(burstSize);
         for (Worm w : newworms) {
-            w.alive=true;
+            w.alive = true;
             w.x = e.getX();
             w.y = e.getY();
             if (burstStyle.equals(BURST_TYPE_RADIAL)) {
@@ -404,6 +403,22 @@ interface methods WormWrangler
 
     public ArrayList<Worm> findAllWorms(float x, float y, float dist2) {
         return (ArrayList<Worm>) findAll(x, y, dist2, Worm.class);
+    }
+
+    public void targetMet(Worm worm, WormTarget target) {
+        synchronized (objects) {
+            setNewTarget(worm);
+            if (Math.random() < worm.aggression) {
+                objects.remove(target);
+                worm.eaten++;
+            } else {
+                worm.reproduced++;
+                if (target instanceof Worm) {
+                    ((Worm) target).reproduced++;
+                    addWorm(worm.getX(), worm.getY());
+                }
+            }
+        }
     }
 
     public Worm findWorm(Worm wormy, float dist2) {

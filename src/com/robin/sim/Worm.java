@@ -24,6 +24,15 @@ public class Worm implements Comparable<Worm>, WormTarget {
     float nearestWormDistance;
 
 
+
+    float aggression=0.5f;
+
+
+
+    int eaten=0;
+    int reproduced=0;
+
+
     float speed = 0.5f;
 
     Paint p = new Paint();
@@ -36,6 +45,7 @@ public class Worm implements Comparable<Worm>, WormTarget {
 
         this.size = (int) (30 * Math.random()) + 15;
         this.speed = (float) (Math.random() * 1.5 + 0.5);
+        this.aggression = (float) (Math.random() );
 
         int rr = 0, gg = 0, bb = 0;
         float ll = 0;
@@ -101,8 +111,8 @@ public class Worm implements Comparable<Worm>, WormTarget {
         diry = targety - y;
         mag = (float) (Math.sqrt(dirx * dirx + diry * diry));
 
-        if (mag < 10) {
-            wormWrangler.setNewTarget(this);
+        if (mag < 2) {
+            wormWrangler.targetMet(this,targetting);
             dirx = targetx - x;
             diry = targety - y;
             mag = (float) (Math.sqrt(dirx * dirx + diry * diry));
@@ -187,6 +197,7 @@ public class Worm implements Comparable<Worm>, WormTarget {
         Worm addWorm(float x, float y);
         Worm findWorm(float x, float y, float dist2);
         ArrayList<Worm> findAllWorms(float x, float y, float dist2);
+        void targetMet(Worm worm, WormTarget target);
     }
 
 }
