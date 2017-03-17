@@ -410,6 +410,14 @@ interface methods WormWrangler
             setNewTarget(worm);
             if (Math.random() < worm.aggression) {
                 objects.remove(target);
+                for (WormTarget o : objects) {
+                    if (o instanceof Worm) {
+                        Worm w =(Worm)o;
+                        if (w.targetting==target) {
+                            w.targetting=null;
+                        }
+                    }
+                }
                 worm.eaten++;
             } else {
                 worm.reproduced++;
