@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/editBurstSize"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentRight="true"
             android:text="10" />
@@ -27,7 +27,7 @@
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/editText"
+            android:layout_below="@+id/editBurstSize"
             android:layout_centerHorizontal="true">
 
             <TextView
@@ -42,20 +42,20 @@
                 android:layout_width="101dp"
                 android:layout_height="wrap_content"
                 android:text="scatter"
-                android:id="@+id/radioButton" />
+                android:id="@+id/radioBurstScatter" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="radial"
-                android:id="@+id/radioButton2"
+                android:id="@+id/radioBurstRadial"
                 android:checked="true" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="seek selected"
-                android:id="@+id/radioButton3" />
+                android:id="@+id/radioBurstSeek" />
         </RadioGroup>
     </RelativeLayout>
 
