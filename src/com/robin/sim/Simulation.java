@@ -46,7 +46,6 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
     /**
      * burst options
      */
-
     static String BURST_TYPE_SCATTER = "BURST_TYPE_SCATTER";
     static String BURST_TYPE_RADIAL = "BURST_TYPE_RADIAL";
     static String BURST_TYPE_SEEK = "BURST_TYPE_SEEK";
@@ -105,20 +104,38 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
      * @param simView
      */
     public Simulation(SimView simView) {
+
         this.simView = simView;
 
-        pallette = new HashMap<String, Paint>();
-        pallette.put(SELECTED_GREEN, newPaint(0, 255, 0, Paint.Style.STROKE));
-        pallette.put(UNDERLAY_GREEN, newPaint(0, 75, 0, Paint.Style.FILL));
+        setupColours();
+        setupPaintableOptions();
+        addWorm(initialWorms);
+
+        Log.d("Simulation", "Create Simulation");
+
+
+    }
+
+    /**
+     * set up map of paintable options
+     */
+    private void setupPaintableOptions() {
 
         options = new HashMap<String, PaintableOption>();
         options.put(SEEK_RADIUS, new PaintableOption(SEEK_RADIUS, 80, false, UNDERLAY_GREEN, FILLED_CIRCLE));
         options.put(SELECT_BOX, new PaintableOption(SELECT_BOX, 30, true, SELECTED_GREEN, STROKED_RECTANGLE));
 
-        Log.d("Simulation", "Create Simulation");
 
-        addWorm(initialWorms);
+    }
 
+    /**
+     * set up colour palette for use
+     */
+    private void setupColours() {
+
+        pallette = new HashMap<String, Paint>();
+        pallette.put(SELECTED_GREEN, newPaint(0, 255, 0, Paint.Style.STROKE));
+        pallette.put(UNDERLAY_GREEN, newPaint(0, 75, 0, Paint.Style.FILL));
     }
 
     private static float distSquared(float x1, float y1, float x2, float y2) {
@@ -132,30 +149,30 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         this.width = width;
         this.height = height;
-try {
-    if (this.objects != null) {
-        synchronized (objects) {
-            for (Iterator<WormTarget> o = objects.iterator(); o.hasNext(); ) {
-                WormTarget w = o.next();
-                if (w != null) {
-                    if (w instanceof Worm) {
-                        Worm worm = (Worm) w;
-                        if (!w.isAlive()) worm.init(width, height);
-                        worm.update();
+        try {
+            if (this.objects != null) {
+                synchronized (objects) {
+                    for (Iterator<WormTarget> o = objects.iterator(); o.hasNext(); ) {
+                        WormTarget w = o.next();
+                        if (w != null) {
+                            if (w instanceof Worm) {
+                                Worm worm = (Worm) w;
+                                if (!w.isAlive()) worm.init(width, height);
+                                worm.update();
+                            }
+                        } else {
+                            Log.d("Simulation", "worm is null " + w);
+                        }
                     }
-                } else {
-                    Log.d("Simulation", "worm is null " + w);
                 }
+            } else {
+                Log.d("Simulation", "objects null");
             }
+        } catch (ConcurrentModificationException e) {
+            //simView.message(e.getMessage());
+            Message message = simView.mHandler.obtainMessage(0, e.getMessage());
+            message.sendToTarget();
         }
-    } else {
-        Log.d("Simulation", "objects null");
-    }
-} catch (ConcurrentModificationException e) {
-    //simView.message(e.getMessage());
-    Message message = simView.mHandler.obtainMessage(0, e.getMessage());
-    message.sendToTarget();
-}
     }
 
     protected void drawMethod(int width, int height) {
@@ -177,7 +194,7 @@ try {
         if (objects != null) {
             synchronized (objects) {
                 for (WormTarget w : objects) {
-                    if (w != null) w.draw(new Canvas(simView.getBuffer()));
+                    if (w != null && w.isAlive()) w.draw(new Canvas(simView.getBuffer()));
                 }
             }
         }
@@ -276,7 +293,6 @@ try {
         double ang = Math.random() * rad;
         Worm[] newworms = addWorm(burstSize);
         for (Worm w : newworms) {
-            w.alive = true;
             w.x = e.getX();
             w.y = e.getY();
             if (burstStyle.equals(BURST_TYPE_RADIAL)) {
@@ -284,11 +300,13 @@ try {
                 w.targety = (float) (w.y + 2 * Math.sin(ang));
                 ang += rad;
             } else if (burstStyle.equals(BURST_TYPE_SCATTER)) {
+                w.targetx = (float) (w.x - 0.5 + Math.random());
+                w.targety = (float) (w.y - 0.5 + Math.random());
             } else if (burstStyle.equals(BURST_TYPE_SEEK)) {
                 w.targetting = selectedWorm;
             }
             w.initSegments();
-
+            w.alive = true;
         }
     }
 
@@ -416,15 +434,15 @@ interface methods WormWrangler
                 objects.remove(target);
                 for (WormTarget o : objects) {
                     if (o instanceof Worm) {
-                        Worm w =(Worm)o;
-                        if (w.targetting==target) {
-                            w.targetting=null;
-
+                        Worm w = (Worm) o;
+                        if (w.targetting == target) {
+                            w.targetting = null;
+                            setNewTarget(w);
                         }
                     }
                 }
                 worm.eaten++;
-                selectedWorm=null;
+                selectedWorm = null;
             } else {
                 worm.reproduced++;
                 if (target instanceof Worm) {
