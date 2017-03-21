@@ -429,10 +429,6 @@ interface methods WormWrangler
 
     public void targetMet(Worm worm, WormTarget target) {
 
-
-        Message message = simView.mHandler.obtainMessage(0, "target met "+worm+" "+target);
-        message.sendToTarget();
-
         synchronized (objects) {
             setNewTarget(worm);
             if (Math.random() < worm.aggression) {
@@ -447,7 +443,6 @@ interface methods WormWrangler
                     }
                 }
                 worm.eaten++;
-                selectedWorm = null;
             } else {
                 worm.reproduced++;
                 if (target instanceof Worm) {
