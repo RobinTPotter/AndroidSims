@@ -113,7 +113,6 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
 
         Log.d("Simulation", "Create Simulation");
 
-
     }
 
     /**
@@ -124,7 +123,6 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         options = new HashMap<String, PaintableOption>();
         options.put(SEEK_RADIUS, new PaintableOption(SEEK_RADIUS, 80, false, UNDERLAY_GREEN, FILLED_CIRCLE));
         options.put(SELECT_BOX, new PaintableOption(SELECT_BOX, 30, true, SELECTED_GREEN, STROKED_RECTANGLE));
-
 
     }
 
@@ -291,22 +289,24 @@ public class Simulation implements View.OnTouchListener, GestureDetector.OnGestu
         //simView.message("long press");
         double rad = 2 * Math.PI / burstSize;
         double ang = Math.random() * rad;
-        Worm[] newworms = addWorm(burstSize);
-        for (Worm w : newworms) {
-            w.x = e.getX();
-            w.y = e.getY();
-            if (burstStyle.equals(BURST_TYPE_RADIAL)) {
-                w.targetx = (float) (w.x + 2 * Math.cos(ang));
-                w.targety = (float) (w.y + 2 * Math.sin(ang));
-                ang += rad;
-            } else if (burstStyle.equals(BURST_TYPE_SCATTER)) {
-                w.targetx = (float) (w.x - 0.5 + Math.random());
-                w.targety = (float) (w.y - 0.5 + Math.random());
-            } else if (burstStyle.equals(BURST_TYPE_SEEK)) {
-                w.targetting = selectedWorm;
+        synchronized (objects) {
+            Worm[] newworms = addWorm(burstSize);
+            for (Worm w : newworms) {
+                w.x = e.getX();
+                w.y = e.getY();
+                if (burstStyle.equals(BURST_TYPE_RADIAL)) {
+                    w.targetx = (float) (w.x + 2 * Math.cos(ang));
+                    w.targety = (float) (w.y + 2 * Math.sin(ang));
+                    ang += rad;
+                } else if (burstStyle.equals(BURST_TYPE_SCATTER)) {
+                    w.targetx = (float) (w.x - 0.5 + Math.random());
+                    w.targety = (float) (w.y - 0.5 + Math.random());
+                } else if (burstStyle.equals(BURST_TYPE_SEEK)) {
+                    w.targetting = selectedWorm;
+                }
+                w.initSegments();
+                w.alive = true;
             }
-            w.initSegments();
-            w.alive = true;
         }
     }
 
@@ -428,6 +428,11 @@ interface methods WormWrangler
     }
 
     public void targetMet(Worm worm, WormTarget target) {
+
+
+        Message message = simView.mHandler.obtainMessage(0, "target met "+worm+" "+target);
+        message.sendToTarget();
+
         synchronized (objects) {
             setNewTarget(worm);
             if (Math.random() < worm.aggression) {
